@@ -51,7 +51,7 @@
     input, select, textarea { font-size: 14px; padding: 8px 10px; border: 0.5px solid var(--border2); border-radius: var(--radius); background: var(--bg); color: var(--text); outline: none; font-family: inherit; width: 100%; }
     input:focus, select:focus, textarea:focus { border-color: var(--text2); box-shadow: 0 0 0 2px rgba(0,0,0,0.06); }
     textarea { resize: vertical; min-height: 72px; }
-    .btn { padding: 8px 16px; font-size: 14px; border-radius: var(--radius); cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text); font-family: inherit; display: inline-flex; align-items: center; gap: 6px; }
+    .btn { padding: 8px 16px; font-size: 14px; border-radius: var(--radius); cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text); font-family: inherit; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
     .btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
     .btn-sm { padding: 5px 10px; font-size: 12px; }
     .btn:hover:not(:disabled) { opacity: 0.78; }
@@ -67,8 +67,10 @@
     .result-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.1rem 1.25rem; margin-bottom: 14px; }
     .job-title { font-size: 15px; font-weight: 500; }
     .job-meta { font-size: 13px; color: var(--text2); margin-top: 3px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .job-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-top: 8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     .result-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-    .company-insights { margin-top: 12px; border-top: 0.5px solid var(--border); padding-top: 12px; display: none; }
+    .apply-bar { display: flex; gap: 7px; margin-top: 8px; flex-wrap: wrap; padding-top: 8px; border-top: 0.5px solid var(--border); }
+    .ai-enrichment { margin-top: 12px; border-top: 0.5px solid var(--border); padding-top: 12px; display: none; }
     .insights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
     .insight-block { background: var(--bg2); border-radius: var(--radius); padding: 10px 12px; font-size: 13px; line-height: 1.6; }
     .insight-label { font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
@@ -105,24 +107,26 @@
     .stage-badge-private { background: var(--purple-bg); color: var(--purple-text); }
     .stage-badge-preipo  { background: var(--amber-bg);  color: var(--amber-text); }
     .info-note { font-size: 12px; color: var(--text3); margin-top: 5px; line-height: 1.5; }
-
-    /* ── Saved searches ── */
+    .real-badge { background: var(--green-bg); color: var(--green-text); font-size: 11px; padding: 2px 8px; border-radius: 99px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; }
+    .enrich-spinner { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); }
     .saved-searches-bar { margin-bottom: 14px; }
     .saved-searches-bar .bar-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
     .saved-searches-bar .bar-label { font-size: 12px; font-weight: 500; color: var(--text2); display: flex; align-items: center; gap: 5px; }
     .saved-list { display: flex; flex-wrap: wrap; gap: 7px; }
-    .saved-chip { display: inline-flex; align-items: center; gap: 0; border: 0.5px solid var(--border2); border-radius: 99px; overflow: hidden; font-size: 13px; background: var(--bg); }
+    .saved-chip { display: inline-flex; align-items: center; border: 0.5px solid var(--border2); border-radius: 99px; overflow: hidden; font-size: 13px; background: var(--bg); }
     .saved-chip-load { padding: 5px 10px 5px 14px; cursor: pointer; background: none; border: none; color: var(--text); font-family: inherit; font-size: 13px; display: flex; align-items: center; gap: 6px; }
     .saved-chip-load:hover { background: var(--bg2); }
-    .saved-chip-del { padding: 5px 10px 5px 6px; cursor: pointer; background: none; border: none; color: var(--text3); font-family: inherit; font-size: 13px; display: flex; align-items: center; border-left: 0.5px solid var(--border); }
+    .saved-chip-del { padding: 5px 10px 5px 6px; cursor: pointer; background: none; border: none; color: var(--text3); font-family: inherit; display: flex; align-items: center; border-left: 0.5px solid var(--border); }
     .saved-chip-del:hover { color: var(--red-text); background: var(--red-bg); }
     .save-modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 100; align-items: center; justify-content: center; }
     .save-modal-bg.open { display: flex; }
-    .save-modal { background: var(--bg); border-radius: var(--radius-lg); padding: 1.5rem; width: 340px; max-width: 90vw; box-shadow: none; border: 0.5px solid var(--border2); }
+    .save-modal { background: var(--bg); border-radius: var(--radius-lg); padding: 1.5rem; width: 340px; max-width: 90vw; border: 0.5px solid var(--border2); }
     .save-modal h2 { font-size: 15px; font-weight: 500; margin-bottom: 12px; }
     .save-modal input { margin-bottom: 12px; }
     .save-modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
     .empty-saved { font-size: 13px; color: var(--text3); font-style: italic; }
+    .results-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+    .results-count { font-size: 13px; color: var(--text2); }
   </style>
 </head>
 <body>
@@ -131,7 +135,7 @@
   <div class="logo"><i class="ti ti-briefcase"></i></div>
   <div>
     <h1>Job Search Agent</h1>
-    <div class="sub">AI-powered · Tech &amp; Data roles</div>
+    <div class="sub">Real job postings · AI-enriched · Tech &amp; Data roles</div>
   </div>
 </div>
 
@@ -144,15 +148,13 @@
 
   <!-- SEARCH -->
   <div id="panel-search" class="panel active">
-
-    <!-- Saved searches bar -->
-    <div class="saved-searches-bar" id="saved-bar">
+    <div class="saved-searches-bar">
       <div class="bar-top">
         <span class="bar-label"><i class="ti ti-bookmark" style="font-size:13px;"></i> Saved searches</span>
         <button class="btn btn-sm" onclick="openSaveModal()"><i class="ti ti-device-floppy"></i> Save current</button>
       </div>
       <div class="saved-list" id="saved-list">
-        <span class="empty-saved">No saved searches yet — fill in your filters and click "Save current".</span>
+        <span class="empty-saved">No saved searches yet — fill in filters and click "Save current".</span>
       </div>
     </div>
 
@@ -200,7 +202,7 @@
         <div class="toggle-row">
           <button class="tog-btn" id="visa-toggle" onclick="toggleVisa()"><i class="ti ti-passport"></i> H1B / Visa sponsorship only</button>
         </div>
-        <div class="info-note" id="visa-note" style="display:none;"><i class="ti ti-info-circle" style="font-size:12px;vertical-align:-1px;"></i> Results will include companies known to sponsor H1B visas and exclude roles requiring US citizenship, green card, or permanent residency.</div>
+        <div class="info-note" id="visa-note" style="display:none;"><i class="ti ti-info-circle" style="font-size:12px;vertical-align:-1px;"></i> Results will favour companies known to sponsor H1B visas. Always confirm directly with the employer.</div>
       </div>
 
       <div class="field" style="margin-bottom:14px;">
@@ -209,7 +211,7 @@
       </div>
 
       <button class="btn btn-primary" id="search-btn" onclick="searchJobs()">
-        <i class="ti ti-sparkles"></i> Find matching jobs
+        <i class="ti ti-search"></i> Search real job postings
       </button>
     </div>
 
@@ -284,12 +286,12 @@
   </div>
 </div>
 
-<!-- Save search modal -->
+<!-- Save modal -->
 <div class="save-modal-bg" id="save-modal-bg" onclick="closeSaveModal(event)">
   <div class="save-modal">
     <h2><i class="ti ti-bookmark" style="font-size:15px;vertical-align:-2px;margin-right:6px;"></i>Save this search</h2>
     <label style="display:block;margin-bottom:6px;">Search name</label>
-    <input type="text" id="save-name-input" placeholder="e.g. Senior DE Remote, Pre-IPO Visa Jobs…" onkeydown="if(event.key==='Enter')confirmSave()" />
+    <input type="text" id="save-name-input" placeholder="e.g. Senior DE Remote H1B" onkeydown="if(event.key==='Enter')confirmSave()" />
     <div class="save-modal-actions">
       <button class="btn" onclick="closeSaveModal()">Cancel</button>
       <button class="btn btn-primary" onclick="confirmSave()"><i class="ti ti-device-floppy"></i> Save</button>
@@ -298,362 +300,370 @@
 </div>
 
 <script>
-  const PROXY_URL = 'https://job-agent-proxy.katiyaranamika.workers.dev';
+const PROXY_URL = 'https://job-agent-proxy.katiyaranamika.workers.dev';
 
-  const applications = JSON.parse(localStorage.getItem('jsa_apps') || '[]');
-  let savedSearches = JSON.parse(localStorage.getItem('jsa_saved_searches') || '[]');
-  const locations = [];
-  const activeStages = new Set();
-  let visaOnly = false;
+const applications = JSON.parse(localStorage.getItem('jsa_apps') || '[]');
+let savedSearches = JSON.parse(localStorage.getItem('jsa_saved_searches') || '[]');
+const locations = [];
+const activeStages = new Set();
+let visaOnly = false;
 
-  renderTracker();
-  renderSavedSearches();
+renderTracker();
+renderSavedSearches();
 
-  // ── Location tags ──
-  function handleLocKey(e) {
-    if (e.key === 'Enter' || e.key === ',') {
-      e.preventDefault();
-      const val = e.target.value.trim().replace(/,$/, '');
-      if (val && !locations.includes(val)) { locations.push(val); renderLocTags(); }
-      e.target.value = '';
-    }
+// ── Location tags ──
+function handleLocKey(e) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = e.target.value.trim().replace(/,$/, '');
+    if (val && !locations.includes(val)) { locations.push(val); renderLocTags(); }
+    e.target.value = '';
   }
-  function removeLocation(i) { locations.splice(i,1); renderLocTags(); }
-  function renderLocTags() {
-    document.getElementById('loc-tags').innerHTML = locations.map((l,i) =>
-      `<span class="loc-tag">${l}<button onclick="removeLocation(${i})" aria-label="Remove ${l}"><i class="ti ti-x" style="font-size:11px;"></i></button></span>`).join('');
-  }
+}
+function removeLocation(i) { locations.splice(i,1); renderLocTags(); }
+function renderLocTags() {
+  document.getElementById('loc-tags').innerHTML = locations.map((l,i) =>
+    `<span class="loc-tag">${l}<button onclick="removeLocation(${i})" aria-label="Remove ${l}"><i class="ti ti-x" style="font-size:11px;"></i></button></span>`).join('');
+}
 
-  // ── Stage toggles ──
-  function toggleStage(s) {
-    if (activeStages.has(s)) activeStages.delete(s); else activeStages.add(s);
-    ['public','private','preipo'].forEach(st => {
-      document.getElementById('stage-'+st).className = 'tog-btn' + (activeStages.has(st) ? ' active-'+st : '');
-    });
-  }
+function toggleStage(s) {
+  if (activeStages.has(s)) activeStages.delete(s); else activeStages.add(s);
+  ['public','private','preipo'].forEach(st => {
+    document.getElementById('stage-'+st).className = 'tog-btn' + (activeStages.has(st) ? ' active-'+st : '');
+  });
+}
 
-  // ── Visa toggle ──
-  function toggleVisa() {
-    visaOnly = !visaOnly;
-    document.getElementById('visa-toggle').className = 'tog-btn' + (visaOnly ? ' active-visa' : '');
-    document.getElementById('visa-note').style.display = visaOnly ? 'block' : 'none';
-  }
+function toggleVisa() {
+  visaOnly = !visaOnly;
+  document.getElementById('visa-toggle').className = 'tog-btn' + (visaOnly ? ' active-visa' : '');
+  document.getElementById('visa-note').style.display = visaOnly ? 'block' : 'none';
+}
 
-  // ── Tab switching ──
-  function switchTab(name) {
-    document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['search','tracker','email'][i] === name));
-    document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-'+name));
-  }
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['search','tracker','email'][i] === name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-'+name));
+}
 
-  // ── Status messages ──
-  function setStatus(elId, type, msg, showSpinner) {
-    const el = document.getElementById(elId);
-    if (!msg) { el.innerHTML = ''; return; }
-    const icon = showSpinner ? '<div class="spinner"></div>'
-      : `<i class="ti ti-${type==='error'?'alert-circle':type==='success'?'circle-check':'info-circle'}" style="font-size:16px;flex-shrink:0"></i>`;
-    el.innerHTML = `<div class="status-box status-${type}">${icon}<span>${msg}</span></div>`;
-  }
+function setStatus(elId, type, msg, showSpinner) {
+  const el = document.getElementById(elId);
+  if (!msg) { el.innerHTML = ''; return; }
+  const icon = showSpinner ? '<div class="spinner"></div>'
+    : `<i class="ti ti-${type==='error'?'alert-circle':type==='success'?'circle-check':'info-circle'}" style="font-size:16px;flex-shrink:0"></i>`;
+  el.innerHTML = `<div class="status-box status-${type}">${icon}<span>${msg}</span></div>`;
+}
 
-  // ── Claude API ──
-  async function callClaude(prompt, statusElId, btnId) {
-    const btn = document.getElementById(btnId);
-    btn.disabled = true;
-    setStatus(statusElId, 'info', 'Contacting AI — this takes 5–15 seconds...', true);
-    try {
-      const res = await fetch(PROXY_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 2500, messages: [{ role: 'user', content: prompt }] })
+// ── Call Cloudflare Worker ──
+async function callProxy(body, requestType) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (requestType) headers['X-Request-Type'] = requestType;
+  const res = await fetch(PROXY_URL, { method: 'POST', headers, body: JSON.stringify(body) });
+  if (!res.ok) throw new Error(`Proxy error ${res.status}: ${await res.text()}`);
+  return res.json();
+}
+
+// ── Search real jobs via JSearch ──
+async function searchJobs() {
+  const title = document.getElementById('search-title').value.trim();
+  if (!title) { setStatus('search-status','error','Please enter a job title first.'); return; }
+
+  const rawLoc = document.getElementById('loc-input').value.trim();
+  if (rawLoc && !locations.includes(rawLoc)) { locations.push(rawLoc); document.getElementById('loc-input').value=''; renderLocTags(); }
+  const locs = locations.length ? locations : ['Remote'];
+  const level = document.getElementById('search-level').value;
+  const skills = document.getElementById('search-skills').value;
+  const salary = document.getElementById('search-salary').value;
+
+  document.getElementById('search-results').innerHTML = '';
+
+  const btn = document.getElementById('search-btn');
+  btn.disabled = true;
+
+  // Build search queries — one per location
+  const queries = locs.map(loc => {
+    let q = title;
+    if (level !== 'Mid level') q += ' ' + level;
+    if (visaOnly) q += ' visa sponsorship H1B';
+    if (skills) q += ' ' + skills.split(',')[0].trim();
+    q += ' ' + loc;
+    return q;
+  });
+
+  setStatus('search-status', 'info', `Searching real job postings across ${locs.join(', ')}...`, true);
+
+  try {
+    // fetch for each location in parallel
+    const results = await Promise.all(queries.map(q =>
+      callProxy({ query: q, remote_only: locs.includes('Remote') ? 'true' : 'false' }, 'jsearch')
+        .catch(() => ({ data: [] }))
+    ));
+
+    // merge and deduplicate by job_id
+    const seen = new Set();
+    let jobs = [];
+    results.forEach(r => {
+      (r.data || []).forEach(j => {
+        if (!seen.has(j.job_id)) { seen.add(j.job_id); jobs.push(j); }
       });
-      if (!res.ok) {
-        const err = await res.text();
-        setStatus(statusElId, 'error', `Proxy error ${res.status}: ${err.slice(0,140)}`);
-        btn.disabled = false; return null;
-      }
-      const data = await res.json();
-      if (data.error) { setStatus(statusElId, 'error', `AI error: ${data.error.message}`); btn.disabled = false; return null; }
-      setStatus(statusElId, 'success', 'Done!');
-      setTimeout(() => setStatus(statusElId, '', ''), 2000);
-      btn.disabled = false;
-      return data.content?.[0]?.text || null;
-    } catch(e) {
-      setStatus(statusElId, 'error', `Network error: ${e.message}`);
-      btn.disabled = false; return null;
-    }
-  }
-
-  // ── Saved searches ──
-  function getCurrentFilters() {
-    return {
-      title: document.getElementById('search-title').value.trim(),
-      level: document.getElementById('search-level').value,
-      locations: [...locations],
-      stages: [...activeStages],
-      salary: document.getElementById('search-salary').value.trim(),
-      skills: document.getElementById('search-skills').value.trim(),
-      visaOnly
-    };
-  }
-
-  function applyFilters(f) {
-    document.getElementById('search-title').value = f.title || '';
-    document.getElementById('search-level').value = f.level || 'Mid level';
-    document.getElementById('search-salary').value = f.salary || '';
-    document.getElementById('search-skills').value = f.skills || '';
-
-    // locations
-    locations.length = 0;
-    (f.locations || []).forEach(l => locations.push(l));
-    renderLocTags();
-
-    // stages
-    activeStages.clear();
-    (f.stages || []).forEach(s => activeStages.add(s));
-    ['public','private','preipo'].forEach(st => {
-      document.getElementById('stage-'+st).className = 'tog-btn' + (activeStages.has(st) ? ' active-'+st : '');
     });
 
-    // visa
-    visaOnly = !!f.visaOnly;
-    document.getElementById('visa-toggle').className = 'tog-btn' + (visaOnly ? ' active-visa' : '');
-    document.getElementById('visa-note').style.display = visaOnly ? 'block' : 'none';
-  }
+    // filter by salary if set
+    const minSalary = salary ? parseInt(salary.replace(/,/g,'')) : 0;
+    if (minSalary) {
+      jobs = jobs.filter(j => {
+        const max = j.job_max_salary || j.job_salary_max || 0;
+        const min = j.job_min_salary || j.job_salary_min || 0;
+        return (max >= minSalary || min >= minSalary || (!max && !min));
+      });
+    }
 
-  function renderSavedSearches() {
-    const el = document.getElementById('saved-list');
-    if (!savedSearches.length) {
-      el.innerHTML = '<span class="empty-saved">No saved searches yet — fill in your filters and click "Save current".</span>';
+    // filter by visa if toggled
+    if (visaOnly) {
+      jobs = jobs.filter(j => {
+        const desc = (j.job_description || '').toLowerCase();
+        const noVisa = /citizen|clearance|green card|permanent resident|us person|usc only/.test(desc);
+        return !noVisa;
+      });
+    }
+
+    if (!jobs.length) {
+      setStatus('search-status', 'error', 'No postings found for these criteria. Try broader keywords or different locations.');
+      btn.disabled = false;
       return;
     }
-    el.innerHTML = savedSearches.map((s, i) => {
-      const tags = [];
-      if (s.filters.title) tags.push(s.filters.title);
-      if (s.filters.locations && s.filters.locations.length) tags.push(s.filters.locations.join(', '));
-      if (s.filters.stages && s.filters.stages.length) tags.push(s.filters.stages.join('/'));
-      if (s.filters.visaOnly) tags.push('H1B');
-      return `<div class="saved-chip">
-        <button class="saved-chip-load" onclick="loadSearch(${i})" title="${tags.join(' · ')}">
-          <i class="ti ti-bookmark" style="font-size:12px;opacity:0.6;"></i>
-          <span style="font-weight:500;">${s.name}</span>
-          <span style="font-size:11px;color:var(--text3);margin-left:2px;">${tags.slice(0,2).join(' · ')}</span>
-        </button>
-        <button class="saved-chip-del" onclick="deleteSearch(${i})" title="Delete '${s.name}'"><i class="ti ti-x" style="font-size:11px;"></i></button>
-      </div>`;
-    }).join('');
-  }
 
-  function loadSearch(i) {
-    applyFilters(savedSearches[i].filters);
-    document.getElementById('search-results').innerHTML = '';
-    setStatus('search-status', 'success', `Loaded "${savedSearches[i].name}" — click Find matching jobs to search.`);
-    setTimeout(() => setStatus('search-status', '', ''), 3000);
-  }
+    // Limit to 10
+    jobs = jobs.slice(0, 10);
 
-  function deleteSearch(i) {
-    if (!confirm(`Delete saved search "${savedSearches[i].name}"?`)) return;
-    savedSearches.splice(i, 1);
-    localStorage.setItem('jsa_saved_searches', JSON.stringify(savedSearches));
-    renderSavedSearches();
-  }
-
-  function openSaveModal() {
-    const f = getCurrentFilters();
-    if (!f.title) { setStatus('search-status','error','Add a job title before saving.'); return; }
-    document.getElementById('save-name-input').value = f.title + (f.locations.length ? ' · ' + f.locations[0] : '');
-    document.getElementById('save-modal-bg').classList.add('open');
-    setTimeout(() => document.getElementById('save-name-input').focus(), 80);
-  }
-
-  function closeSaveModal(e) {
-    if (!e || e.target === document.getElementById('save-modal-bg')) {
-      document.getElementById('save-modal-bg').classList.remove('open');
-    }
-  }
-
-  function confirmSave() {
-    const name = document.getElementById('save-name-input').value.trim();
-    if (!name) { document.getElementById('save-name-input').focus(); return; }
-    savedSearches.unshift({ name, filters: getCurrentFilters(), savedAt: new Date().toISOString() });
-    localStorage.setItem('jsa_saved_searches', JSON.stringify(savedSearches));
-    renderSavedSearches();
-    closeSaveModal();
-    setStatus('search-status', 'success', `Search "${name}" saved! Click it anytime to reload.`);
-    setTimeout(() => setStatus('search-status', '', ''), 3000);
-  }
-
-  // ── Job search ──
-  async function searchJobs() {
-    const title = document.getElementById('search-title').value.trim();
-    if (!title) { setStatus('search-status','error','Please enter a job title first.'); return; }
-
-    const rawLoc = document.getElementById('loc-input').value.trim();
-    if (rawLoc && !locations.includes(rawLoc)) { locations.push(rawLoc); document.getElementById('loc-input').value=''; renderLocTags(); }
-    const locs = locations.length ? locations : ['Remote'];
-    const level = document.getElementById('search-level').value;
-    const salary = document.getElementById('search-salary').value;
-    const skills = document.getElementById('search-skills').value;
-    const stages = activeStages.size ? [...activeStages].join(', ') : 'any';
-
-    document.getElementById('search-results').innerHTML = '';
-
-    const visaInstruction = visaOnly
-      ? `IMPORTANT — Visa filter ON: Only include companies with strong H1B sponsorship history. Exclude roles requiring US citizenship, security clearance, green card, or permanent residency.`
-      : `Assess each company's H1B sponsorship likelihood. Set visaSponsorship to "Yes", "Unlikely", or "Unknown".`;
-
-    const prompt = `You are an expert tech job search assistant with deep knowledge of the US tech industry and H1B visa sponsorship patterns.
-
-Generate 5 realistic tech/data job listings for:
-- Role: ${title}
-- Locations: ${locs.join(', ')} (spread across these)
-- Level: ${level}
-- Company stage: ${stages}
-- ${salary ? 'Min salary: $'+salary : 'Any salary'}
-- ${skills ? 'Skills: '+skills : ''}
-
-${visaInstruction}
-
-Return ONLY a valid JSON array, no markdown, no backticks. Each object:
-- company, title, location, salary (e.g. "$130k–$160k"), match (70-99), stage ("Public"/"Private"/"Pre-IPO")
-- tags (array of 3 strings), summary (2 sentences), posted (e.g. "2 days ago")
-- visaSponsorship ("Yes"/"Unlikely"/"Unknown"), visaNote (1 sentence)
-- companySnapshot (object: founded, size, funding, mission)
-- newsBullets (array of 3 strings, each under 20 words)`;
-
-    const text = await callClaude(prompt, 'search-status', 'search-btn');
-    if (!text) return;
-
-    let jobs;
-    try { jobs = JSON.parse(text.replace(/```json|```/g,'').trim()); }
-    catch(e) { setStatus('search-status','error','Could not parse AI response. Please try again.'); return; }
+    setStatus('search-status', 'success', `Found ${jobs.length} real postings — loading AI insights…`);
 
     const el = document.getElementById('search-results');
-    el.innerHTML = '';
+    el.innerHTML = `<div class="results-header">
+      <span class="results-count"><span class="real-badge"><i class="ti ti-circle-check" style="font-size:11px;"></i> Real postings</span> &nbsp;${jobs.length} results · click "AI insights" on any card for company details</span>
+    </div>`;
 
     jobs.forEach((job, idx) => {
-      const mc = job.match >= 85 ? 'green' : job.match >= 75 ? 'amber' : 'blue';
-      const stageBadgeClass = job.stage === 'Public' ? 'stage-badge-public' : job.stage === 'Pre-IPO' ? 'stage-badge-preipo' : 'stage-badge-private';
-      const stageIcon = job.stage === 'Public' ? 'ti-building-bank' : job.stage === 'Pre-IPO' ? 'ti-rocket' : 'ti-lock';
-      const vs = job.visaSponsorship || 'Unknown';
-      const visaClass = vs === 'Yes' ? 'visa-yes' : vs === 'Unlikely' ? 'visa-no' : 'visa-unknown';
-      const visaIcon = vs === 'Yes' ? 'ti-circle-check' : vs === 'Unlikely' ? 'ti-circle-x' : 'ti-help-circle';
-      const visaLabel = vs === 'Yes' ? 'H1B sponsorship likely' : vs === 'Unlikely' ? 'Sponsorship unlikely / US auth required' : 'Sponsorship status unknown';
-      const snap = job.companySnapshot || {};
-      const news = job.newsBullets || [];
+      const company = job.employer_name || 'Unknown company';
+      const jobTitle = job.job_title || title;
+      const location = job.job_city ? `${job.job_city}${job.job_state ? ', '+job.job_state : ''}` : (job.job_is_remote ? 'Remote' : 'Location not listed');
+      const posted = job.job_posted_at_datetime_utc ? timeAgo(job.job_posted_at_datetime_utc) : 'Recently posted';
+      const applyUrl = job.job_apply_link || job.job_google_link || '#';
+      const logo = job.employer_logo;
+      const salaryText = formatSalary(job);
+      const desc = (job.job_description || '').slice(0, 300).replace(/</g,'&lt;') + '…';
+      const isRemote = job.job_is_remote;
 
       el.innerHTML += `<div class="result-card" id="job-${idx}">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-          <div>
-            <div class="job-title">${job.title}</div>
-            <div class="job-meta">
-              <span><i class="ti ti-building" style="font-size:13px;vertical-align:-1px;"></i> ${job.company}</span>
-              <span><i class="ti ti-map-pin" style="font-size:13px;vertical-align:-1px;"></i> ${job.location}</span>
-              <span><i class="ti ti-clock" style="font-size:13px;vertical-align:-1px;"></i> ${job.posted}</span>
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            ${logo ? `<img src="${logo}" alt="${company}" style="width:36px;height:36px;border-radius:6px;object-fit:contain;border:0.5px solid var(--border);flex-shrink:0;" onerror="this.style.display='none'" />` : ''}
+            <div>
+              <div class="job-title">${jobTitle}</div>
+              <div class="job-meta">
+                <span><i class="ti ti-building" style="font-size:13px;vertical-align:-1px;"></i> ${company}</span>
+                <span><i class="ti ti-map-pin" style="font-size:13px;vertical-align:-1px;"></i> ${location}</span>
+                ${isRemote ? '<span class="badge badge-teal">Remote</span>' : ''}
+                <span><i class="ti ti-clock" style="font-size:13px;vertical-align:-1px;"></i> ${posted}</span>
+              </div>
             </div>
           </div>
           <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;">
-            <span class="badge ${stageBadgeClass}"><i class="ti ${stageIcon}" style="font-size:11px;vertical-align:-1px;"></i> ${job.stage}</span>
-            <span class="badge badge-${mc}">${job.match}% match</span>
-            <span style="font-size:14px;font-weight:500;color:var(--text2)">${job.salary}</span>
+            ${salaryText ? `<span style="font-size:13px;font-weight:500;color:var(--text2)">${salaryText}</span>` : ''}
           </div>
         </div>
-        <div style="display:flex;gap:6px;margin:8px 0;flex-wrap:wrap;">${job.tags.map(t=>`<span class="badge badge-gray">${t}</span>`).join('')}</div>
-        <div style="font-size:13px;color:var(--text2);line-height:1.6;">${job.summary}</div>
-        <div class="visa-banner ${visaClass}">
-          <i class="ti ${visaIcon}" style="font-size:15px;flex-shrink:0;"></i>
-          <div>
-            <div style="font-weight:500;">${visaLabel}</div>
-            <div style="font-size:11px;font-weight:400;margin-top:2px;opacity:0.85;">${job.visaNote || ''}</div>
-          </div>
-        </div>
+
+        <div class="job-desc">${desc}</div>
+
         <div class="result-actions">
-          <button class="btn btn-sm" onclick="trackJob('${job.company.replace(/'/g,"\\'")}','${job.title.replace(/'/g,"\\'")}')"><i class="ti ti-plus"></i> Track</button>
-          <button class="btn btn-sm" onclick="draftForJob('${job.company.replace(/'/g,"\\'")}','${job.title.replace(/'/g,"\\'")}')"><i class="ti ti-mail"></i> Draft email</button>
-          <button class="btn btn-sm" onclick="toggleInsights(${idx})"><i class="ti ti-building-community"></i> Company insights</button>
+          <a class="btn btn-sm btn-primary" href="${applyUrl}" target="_blank" rel="noopener"><i class="ti ti-external-link"></i> Apply now</a>
+          <button class="btn btn-sm" onclick="trackJob('${company.replace(/'/g,"\\'")}','${jobTitle.replace(/'/g,"\\'")}','${applyUrl.replace(/'/g,"\\'")}')"><i class="ti ti-plus"></i> Track</button>
+          <button class="btn btn-sm" onclick="draftForJob('${company.replace(/'/g,"\\'")}','${jobTitle.replace(/'/g,"\\'")}')"><i class="ti ti-mail"></i> Draft email</button>
+          <button class="btn btn-sm" onclick="loadAIInsights(${idx}, '${company.replace(/'/g,"\\'")}', '${jobTitle.replace(/'/g,"\\'")}')"><i class="ti ti-sparkles"></i> AI insights</button>
         </div>
-        <div class="company-insights" id="insights-${idx}">
-          <div style="font-size:13px;font-weight:500;margin-bottom:8px;"><i class="ti ti-building-community" style="font-size:14px;vertical-align:-2px;"></i> ${job.company} — Company snapshot</div>
-          <div class="insights-grid">
-            ${snap.founded ? `<div class="insight-block"><div class="insight-label">Founded</div>${snap.founded}</div>` : ''}
-            ${snap.size    ? `<div class="insight-block"><div class="insight-label">Team size</div>${snap.size}</div>` : ''}
-            ${snap.funding ? `<div class="insight-block"><div class="insight-label">Funding / status</div>${snap.funding}</div>` : ''}
-            ${snap.mission ? `<div class="insight-block" style="grid-column:span 2"><div class="insight-label">Mission</div>${snap.mission}</div>` : ''}
-          </div>
-          ${news.length ? `
-          <div style="font-size:13px;font-weight:500;margin:12px 0 8px;"><i class="ti ti-news" style="font-size:14px;vertical-align:-2px;"></i> Recent news &amp; highlights</div>
-          <div class="news-list">${news.map(n=>`<div class="news-item"><i class="ti ti-point-filled" style="font-size:10px;color:var(--text3);vertical-align:1px;margin-right:4px;"></i>${n}</div>`).join('')}</div>` : ''}
-        </div>
+
+        <div class="ai-enrichment" id="enrich-${idx}"></div>
       </div>`;
     });
-  }
 
-  function toggleInsights(idx) {
-    const el = document.getElementById('insights-'+idx);
-    el.style.display = el.style.display === 'block' ? 'none' : 'block';
-  }
+    setTimeout(() => setStatus('search-status','',''), 3000);
 
-  // ── Tracker ──
-  function saveApps() { localStorage.setItem('jsa_apps', JSON.stringify(applications)); }
+  } catch(e) {
+    setStatus('search-status', 'error', `Search failed: ${e.message}`);
+  }
+  btn.disabled = false;
+}
 
-  function trackJob(company, role) {
-    applications.push({ company, role, status:'applied', date:new Date().toISOString().split('T')[0], notes:'' });
-    saveApps(); renderTracker(); switchTab('tracker');
-  }
-  function draftForJob(company, role) {
-    document.getElementById('email-company').value = company;
-    document.getElementById('email-role').value = role;
-    switchTab('email');
-  }
-  function showAddApp() {
-    const f = document.getElementById('add-app-form');
-    f.style.display = f.style.display === 'none' ? 'block' : 'none';
-    document.getElementById('app-date').value = new Date().toISOString().split('T')[0];
-  }
-  function addApplication() {
-    const company = document.getElementById('app-company').value.trim();
-    const role = document.getElementById('app-role').value.trim();
-    if (!company || !role) { alert('Fill in company and role.'); return; }
-    applications.push({ company, role, status:document.getElementById('app-status').value, date:document.getElementById('app-date').value, notes:document.getElementById('app-notes').value });
-    saveApps(); renderTracker();
-    document.getElementById('add-app-form').style.display='none';
-    ['app-company','app-role','app-notes'].forEach(id => document.getElementById(id).value='');
-  }
-  function removeApp(i) { applications.splice(i,1); saveApps(); renderTracker(); }
-  function renderTracker() {
-    document.getElementById('stat-total').textContent = applications.length;
-    document.getElementById('stat-interviews').textContent = applications.filter(a=>a.status==='interviewing').length;
-    document.getElementById('stat-offers').textContent = applications.filter(a=>a.status==='offer').length;
-    const sb = {applied:'blue',interviewing:'amber',offer:'green',rejected:'gray'};
-    const sl = {applied:'Applied',interviewing:'Interviewing',offer:'Offer',rejected:'Rejected'};
-    const list = document.getElementById('tracker-list');
-    if (!applications.length) { list.innerHTML='<div class="empty-state"><i class="ti ti-clipboard-list" style="font-size:32px;display:block;margin-bottom:8px;"></i>No applications yet.</div>'; return; }
-    list.innerHTML = '<div class="card">'+applications.map((a,i)=>`
-      <div class="tracker-row">
-        <div style="flex:1;min-width:120px;"><div style="font-size:14px;font-weight:500;">${a.company}</div><div style="font-size:12px;color:var(--text2);">${a.role}</div></div>
-        <span class="badge badge-${sb[a.status]}">${sl[a.status]}</span>
-        <span style="font-size:12px;color:var(--text2);">${a.date}</span>
-        <button class="btn btn-sm" onclick="draftForJob('${a.company.replace(/'/g,"\\'")}','${a.role.replace(/'/g,"\\'")}')"><i class="ti ti-mail"></i></button>
-        <button class="btn btn-sm" onclick="removeApp(${i})"><i class="ti ti-trash"></i></button>
-      </div>`).join('')+'</div>';
-  }
+// ── AI insights for a real job ──
+async function loadAIInsights(idx, company, jobTitle) {
+  const el = document.getElementById('enrich-'+idx);
+  if (el.style.display === 'block') { el.style.display = 'none'; return; }
+  el.style.display = 'block';
+  el.innerHTML = `<div class="enrich-spinner"><div class="spinner"></div> Loading AI insights for ${company}…</div>`;
 
-  // ── Email ──
-  async function draftEmail() {
-    const company = document.getElementById('email-company').value.trim();
-    const role = document.getElementById('email-role').value.trim();
-    if (!company || !role) { setStatus('email-status','error','Fill in the target company and role.'); return; }
-    const prompt = `Write a concise cold outreach email for a tech job seeker who needs H1B visa sponsorship.
+  const prompt = `You are a tech industry expert. For the company "${company}" hiring a "${jobTitle}", provide:
+1. Company snapshot (founded, size, funding/stage, mission — each 1 short sentence)
+2. Whether they typically sponsor H1B visas (Yes/Unlikely/Unknown) and why in 1 sentence
+3. Three recent notable facts or news about ${company} (each under 20 words)
+
+Return ONLY valid JSON, no markdown:
+{
+  "stage": "Public" or "Private" or "Pre-IPO",
+  "snapshot": { "founded": "...", "size": "...", "funding": "...", "mission": "..." },
+  "visaSponsorship": "Yes" or "Unlikely" or "Unknown",
+  "visaNote": "...",
+  "newsBullets": ["...", "...", "..."]
+}`;
+
+  try {
+    const data = await callProxy({ model: 'claude-sonnet-4-6', max_tokens: 600, messages: [{ role: 'user', content: prompt }] });
+    const text = data.content?.[0]?.text || '';
+    const info = JSON.parse(text.replace(/```json|```/g,'').trim());
+
+    const snap = info.snapshot || {};
+    const news = info.newsBullets || [];
+    const vs = info.visaSponsorship || 'Unknown';
+    const visaClass = vs === 'Yes' ? 'visa-yes' : vs === 'Unlikely' ? 'visa-no' : 'visa-unknown';
+    const visaIcon = vs === 'Yes' ? 'ti-circle-check' : vs === 'Unlikely' ? 'ti-circle-x' : 'ti-help-circle';
+    const visaLabel = vs === 'Yes' ? 'H1B sponsorship likely' : vs === 'Unlikely' ? 'Sponsorship unlikely / US auth required' : 'Sponsorship status unknown';
+    const stageBadgeClass = info.stage === 'Public' ? 'stage-badge-public' : info.stage === 'Pre-IPO' ? 'stage-badge-preipo' : 'stage-badge-private';
+
+    el.innerHTML = `
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+        <span style="font-size:13px;font-weight:500;"><i class="ti ti-building-community" style="font-size:14px;vertical-align:-2px;"></i> ${company} — AI snapshot</span>
+        ${info.stage ? `<span class="badge ${stageBadgeClass}">${info.stage}</span>` : ''}
+      </div>
+      <div class="insights-grid">
+        ${snap.founded ? `<div class="insight-block"><div class="insight-label">Founded</div>${snap.founded}</div>` : ''}
+        ${snap.size    ? `<div class="insight-block"><div class="insight-label">Team size</div>${snap.size}</div>` : ''}
+        ${snap.funding ? `<div class="insight-block"><div class="insight-label">Funding / status</div>${snap.funding}</div>` : ''}
+        ${snap.mission ? `<div class="insight-block" style="grid-column:span 2"><div class="insight-label">Mission</div>${snap.mission}</div>` : ''}
+      </div>
+      <div class="visa-banner ${visaClass}" style="margin-top:10px;">
+        <i class="ti ${visaIcon}" style="font-size:15px;flex-shrink:0;"></i>
+        <div>
+          <div style="font-weight:500;">${visaLabel}</div>
+          <div style="font-size:11px;font-weight:400;margin-top:2px;opacity:0.85;">${info.visaNote || ''}</div>
+        </div>
+      </div>
+      ${news.length ? `
+      <div style="font-size:13px;font-weight:500;margin:12px 0 8px;"><i class="ti ti-news" style="font-size:14px;vertical-align:-2px;"></i> Recent news &amp; highlights</div>
+      <div class="news-list">${news.map(n=>`<div class="news-item"><i class="ti ti-point-filled" style="font-size:10px;color:var(--text3);vertical-align:1px;margin-right:4px;"></i>${n}</div>`).join('')}</div>` : ''}
+    `;
+  } catch(e) {
+    el.innerHTML = `<div style="font-size:13px;color:var(--text2);">Could not load AI insights. Try again.</div>`;
+  }
+}
+
+// ── Helpers ──
+function timeAgo(dateStr) {
+  const diff = Math.floor((Date.now() - new Date(dateStr)) / 86400000);
+  if (diff === 0) return 'Today';
+  if (diff === 1) return 'Yesterday';
+  if (diff < 7) return `${diff} days ago`;
+  if (diff < 30) return `${Math.floor(diff/7)} weeks ago`;
+  return `${Math.floor(diff/30)} months ago`;
+}
+
+function formatSalary(job) {
+  const min = job.job_min_salary || job.job_salary_min;
+  const max = job.job_max_salary || job.job_salary_max;
+  const period = job.job_salary_period || job.job_salary_currency;
+  if (!min && !max) return '';
+  const fmt = n => n >= 1000 ? '$' + Math.round(n/1000) + 'k' : '$' + n;
+  if (min && max) return `${fmt(min)}–${fmt(max)}${period === 'HOUR' ? '/hr' : '/yr'}`;
+  if (min) return `From ${fmt(min)}`;
+  if (max) return `Up to ${fmt(max)}`;
+  return '';
+}
+
+// ── Saved searches ──
+function getCurrentFilters() {
+  return { title: document.getElementById('search-title').value.trim(), level: document.getElementById('search-level').value, locations: [...locations], stages: [...activeStages], salary: document.getElementById('search-salary').value.trim(), skills: document.getElementById('search-skills').value.trim(), visaOnly };
+}
+function applyFilters(f) {
+  document.getElementById('search-title').value = f.title || '';
+  document.getElementById('search-level').value = f.level || 'Mid level';
+  document.getElementById('search-salary').value = f.salary || '';
+  document.getElementById('search-skills').value = f.skills || '';
+  locations.length = 0; (f.locations || []).forEach(l => locations.push(l)); renderLocTags();
+  activeStages.clear(); (f.stages || []).forEach(s => activeStages.add(s));
+  ['public','private','preipo'].forEach(st => { document.getElementById('stage-'+st).className = 'tog-btn' + (activeStages.has(st) ? ' active-'+st : ''); });
+  visaOnly = !!f.visaOnly;
+  document.getElementById('visa-toggle').className = 'tog-btn' + (visaOnly ? ' active-visa' : '');
+  document.getElementById('visa-note').style.display = visaOnly ? 'block' : 'none';
+}
+function renderSavedSearches() {
+  const el = document.getElementById('saved-list');
+  if (!savedSearches.length) { el.innerHTML = '<span class="empty-saved">No saved searches yet.</span>'; return; }
+  el.innerHTML = savedSearches.map((s,i) => {
+    const tags = [s.filters.title, ...(s.filters.locations||[]).slice(0,1), s.filters.visaOnly?'H1B':''].filter(Boolean);
+    return `<div class="saved-chip">
+      <button class="saved-chip-load" onclick="loadSearch(${i})"><i class="ti ti-bookmark" style="font-size:12px;opacity:0.6;"></i><span style="font-weight:500;">${s.name}</span><span style="font-size:11px;color:var(--text3);margin-left:2px;">${tags.slice(0,2).join(' · ')}</span></button>
+      <button class="saved-chip-del" onclick="deleteSearch(${i})" title="Delete"><i class="ti ti-x" style="font-size:11px;"></i></button>
+    </div>`;
+  }).join('');
+}
+function loadSearch(i) { applyFilters(savedSearches[i].filters); document.getElementById('search-results').innerHTML = ''; setStatus('search-status','success',`Loaded "${savedSearches[i].name}" — click Search to run it.`); setTimeout(()=>setStatus('search-status','',''),3000); }
+function deleteSearch(i) { if(!confirm(`Delete "${savedSearches[i].name}"?`))return; savedSearches.splice(i,1); localStorage.setItem('jsa_saved_searches',JSON.stringify(savedSearches)); renderSavedSearches(); }
+function openSaveModal() { const f=getCurrentFilters(); if(!f.title){setStatus('search-status','error','Add a job title before saving.');return;} document.getElementById('save-name-input').value=f.title+(f.locations.length?' · '+f.locations[0]:''); document.getElementById('save-modal-bg').classList.add('open'); setTimeout(()=>document.getElementById('save-name-input').focus(),80); }
+function closeSaveModal(e) { if(!e||e.target===document.getElementById('save-modal-bg'))document.getElementById('save-modal-bg').classList.remove('open'); }
+function confirmSave() { const name=document.getElementById('save-name-input').value.trim(); if(!name)return; savedSearches.unshift({name,filters:getCurrentFilters(),savedAt:new Date().toISOString()}); localStorage.setItem('jsa_saved_searches',JSON.stringify(savedSearches)); renderSavedSearches(); closeSaveModal(); setStatus('search-status','success',`Saved "${name}"!`); setTimeout(()=>setStatus('search-status','',''),2500); }
+
+// ── Tracker ──
+function saveApps() { localStorage.setItem('jsa_apps', JSON.stringify(applications)); }
+function trackJob(company, role, url) {
+  applications.push({ company, role, url: url||'', status:'applied', date:new Date().toISOString().split('T')[0], notes:'' });
+  saveApps(); renderTracker(); switchTab('tracker');
+}
+function draftForJob(company, role) { document.getElementById('email-company').value=company; document.getElementById('email-role').value=role; switchTab('email'); }
+function showAddApp() { const f=document.getElementById('add-app-form'); f.style.display=f.style.display==='none'?'block':'none'; document.getElementById('app-date').value=new Date().toISOString().split('T')[0]; }
+function addApplication() {
+  const company=document.getElementById('app-company').value.trim(), role=document.getElementById('app-role').value.trim();
+  if(!company||!role){alert('Fill in company and role.');return;}
+  applications.push({company,role,url:'',status:document.getElementById('app-status').value,date:document.getElementById('app-date').value,notes:document.getElementById('app-notes').value});
+  saveApps(); renderTracker(); document.getElementById('add-app-form').style.display='none';
+  ['app-company','app-role','app-notes'].forEach(id=>document.getElementById(id).value='');
+}
+function removeApp(i) { applications.splice(i,1); saveApps(); renderTracker(); }
+function renderTracker() {
+  document.getElementById('stat-total').textContent=applications.length;
+  document.getElementById('stat-interviews').textContent=applications.filter(a=>a.status==='interviewing').length;
+  document.getElementById('stat-offers').textContent=applications.filter(a=>a.status==='offer').length;
+  const sb={applied:'blue',interviewing:'amber',offer:'green',rejected:'gray'};
+  const sl={applied:'Applied',interviewing:'Interviewing',offer:'Offer',rejected:'Rejected'};
+  const list=document.getElementById('tracker-list');
+  if(!applications.length){list.innerHTML='<div class="empty-state"><i class="ti ti-clipboard-list" style="font-size:32px;display:block;margin-bottom:8px;"></i>No applications yet.</div>';return;}
+  list.innerHTML='<div class="card">'+applications.map((a,i)=>`
+    <div class="tracker-row">
+      <div style="flex:1;min-width:120px;"><div style="font-size:14px;font-weight:500;">${a.company}</div><div style="font-size:12px;color:var(--text2);">${a.role}</div></div>
+      <span class="badge badge-${sb[a.status]}">${sl[a.status]}</span>
+      <span style="font-size:12px;color:var(--text2);">${a.date}</span>
+      ${a.url&&a.url!=='#'?`<a class="btn btn-sm" href="${a.url}" target="_blank" rel="noopener"><i class="ti ti-external-link"></i></a>`:''}
+      <button class="btn btn-sm" onclick="draftForJob('${a.company.replace(/'/g,"\\'")}','${a.role.replace(/'/g,"\\'")}')"><i class="ti ti-mail"></i></button>
+      <button class="btn btn-sm" onclick="removeApp(${i})"><i class="ti ti-trash"></i></button>
+    </div>`).join('')+'</div>';
+}
+
+// ── Email ──
+async function draftEmail() {
+  const company=document.getElementById('email-company').value.trim(), role=document.getElementById('email-role').value.trim();
+  if(!company||!role){setStatus('email-status','error','Fill in company and role.');return;}
+  const prompt=`Write a concise cold outreach email for a tech job seeker who needs H1B visa sponsorship.
 From: ${document.getElementById('email-yourname').value||'the candidate'}
 Background: ${document.getElementById('email-bg').value||'a tech professional'}
-To: ${document.getElementById('email-toname').value||'hiring team'} at ${company}
-Role: ${role}
-${document.getElementById('email-why').value?'Why this company: '+document.getElementById('email-why').value:''}
-Under 180 words. Start with "Subject: ..." on line 1, then the email body. Mention visa sponsorship naturally and confidently — not apologetically. Warm, specific, ready to send. No placeholder brackets.`;
-    document.getElementById('email-output').style.display='none';
-    const text = await callClaude(prompt,'email-status','email-btn');
-    if (!text) return;
-    const out = document.getElementById('email-output');
-    out.style.display='block'; out.textContent=text;
-  }
+To: ${document.getElementById('email-toname').value||'hiring team'} at ${company}, Role: ${role}
+${document.getElementById('email-why').value?'Why: '+document.getElementById('email-why').value:''}
+Under 180 words. Start with "Subject: ..." on line 1. Mention visa sponsorship naturally, not apologetically. No placeholder brackets.`;
+  const btn=document.getElementById('email-btn'); btn.disabled=true;
+  setStatus('email-status','info','Drafting email…',true);
+  document.getElementById('email-output').style.display='none';
+  try {
+    const data=await callProxy({model:'claude-sonnet-4-6',max_tokens:600,messages:[{role:'user',content:prompt}]});
+    if(data.error){setStatus('email-status','error',data.error.message);btn.disabled=false;return;}
+    setStatus('email-status','success','Done!'); setTimeout(()=>setStatus('email-status','',''),2000);
+    const out=document.getElementById('email-output'); out.style.display='block'; out.textContent=data.content?.[0]?.text||'';
+  } catch(e){setStatus('email-status','error',e.message);}
+  btn.disabled=false;
+}
 </script>
 </body>
 </html>
