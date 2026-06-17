@@ -51,8 +51,9 @@
     input, select, textarea { font-size: 14px; padding: 8px 10px; border: 0.5px solid var(--border2); border-radius: var(--radius); background: var(--bg); color: var(--text); outline: none; font-family: inherit; width: 100%; }
     input:focus, select:focus, textarea:focus { border-color: var(--text2); box-shadow: 0 0 0 2px rgba(0,0,0,0.06); }
     textarea { resize: vertical; min-height: 72px; }
-    .btn { padding: 8px 16px; font-size: 14px; border-radius: var(--radius); cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text); font-family: inherit; }
+    .btn { padding: 8px 16px; font-size: 14px; border-radius: var(--radius); cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text); font-family: inherit; display: inline-flex; align-items: center; gap: 6px; }
     .btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .btn-sm { padding: 5px 10px; font-size: 12px; }
     .btn:hover:not(:disabled) { opacity: 0.78; }
     .btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 99px; font-weight: 500; white-space: nowrap; }
@@ -95,7 +96,7 @@
     .loc-tag { display: inline-flex; align-items: center; gap: 5px; background: var(--blue-bg); color: var(--blue-text); border-radius: 99px; font-size: 12px; padding: 3px 10px; }
     .loc-tag button { background: none; border: none; cursor: pointer; color: inherit; font-size: 13px; line-height: 1; padding: 0; display: flex; align-items: center; }
     .toggle-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-    .tog-btn { padding: 5px 14px; font-size: 13px; border-radius: 99px; cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text2); font-family: inherit; }
+    .tog-btn { padding: 5px 14px; font-size: 13px; border-radius: 99px; cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text2); font-family: inherit; display: inline-flex; align-items: center; gap: 5px; }
     .tog-btn.active-public  { background: var(--green-bg);  color: var(--green-text);  border-color: var(--green-text); }
     .tog-btn.active-private { background: var(--purple-bg); color: var(--purple-text); border-color: var(--purple-text); }
     .tog-btn.active-preipo  { background: var(--amber-bg);  color: var(--amber-text);  border-color: var(--amber-text); }
@@ -104,6 +105,24 @@
     .stage-badge-private { background: var(--purple-bg); color: var(--purple-text); }
     .stage-badge-preipo  { background: var(--amber-bg);  color: var(--amber-text); }
     .info-note { font-size: 12px; color: var(--text3); margin-top: 5px; line-height: 1.5; }
+
+    /* ── Saved searches ── */
+    .saved-searches-bar { margin-bottom: 14px; }
+    .saved-searches-bar .bar-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .saved-searches-bar .bar-label { font-size: 12px; font-weight: 500; color: var(--text2); display: flex; align-items: center; gap: 5px; }
+    .saved-list { display: flex; flex-wrap: wrap; gap: 7px; }
+    .saved-chip { display: inline-flex; align-items: center; gap: 0; border: 0.5px solid var(--border2); border-radius: 99px; overflow: hidden; font-size: 13px; background: var(--bg); }
+    .saved-chip-load { padding: 5px 10px 5px 14px; cursor: pointer; background: none; border: none; color: var(--text); font-family: inherit; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+    .saved-chip-load:hover { background: var(--bg2); }
+    .saved-chip-del { padding: 5px 10px 5px 6px; cursor: pointer; background: none; border: none; color: var(--text3); font-family: inherit; font-size: 13px; display: flex; align-items: center; border-left: 0.5px solid var(--border); }
+    .saved-chip-del:hover { color: var(--red-text); background: var(--red-bg); }
+    .save-modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 100; align-items: center; justify-content: center; }
+    .save-modal-bg.open { display: flex; }
+    .save-modal { background: var(--bg); border-radius: var(--radius-lg); padding: 1.5rem; width: 340px; max-width: 90vw; box-shadow: none; border: 0.5px solid var(--border2); }
+    .save-modal h2 { font-size: 15px; font-weight: 500; margin-bottom: 12px; }
+    .save-modal input { margin-bottom: 12px; }
+    .save-modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+    .empty-saved { font-size: 13px; color: var(--text3); font-style: italic; }
   </style>
 </head>
 <body>
@@ -125,6 +144,18 @@
 
   <!-- SEARCH -->
   <div id="panel-search" class="panel active">
+
+    <!-- Saved searches bar -->
+    <div class="saved-searches-bar" id="saved-bar">
+      <div class="bar-top">
+        <span class="bar-label"><i class="ti ti-bookmark" style="font-size:13px;"></i> Saved searches</span>
+        <button class="btn btn-sm" onclick="openSaveModal()"><i class="ti ti-device-floppy"></i> Save current</button>
+      </div>
+      <div class="saved-list" id="saved-list">
+        <span class="empty-saved">No saved searches yet — fill in your filters and click "Save current".</span>
+      </div>
+    </div>
+
     <div class="card">
       <div class="row">
         <div class="field" style="flex:2;min-width:200px;">
@@ -181,6 +212,7 @@
         <i class="ti ti-sparkles"></i> Find matching jobs
       </button>
     </div>
+
     <div id="search-status"></div>
     <div id="search-results"></div>
   </div>
@@ -220,7 +252,7 @@
       </div>
     </div>
     <div id="tracker-list">
-      <div class="empty-state"><i class="ti ti-clipboard-list" style="font-size:32px;display:block;margin-bottom:8px;"></i>No applications yet. Start by finding jobs!</div>
+      <div class="empty-state"><i class="ti ti-clipboard-list" style="font-size:32px;display:block;margin-bottom:8px;"></i>No applications yet.</div>
     </div>
   </div>
 
@@ -252,16 +284,32 @@
   </div>
 </div>
 
+<!-- Save search modal -->
+<div class="save-modal-bg" id="save-modal-bg" onclick="closeSaveModal(event)">
+  <div class="save-modal">
+    <h2><i class="ti ti-bookmark" style="font-size:15px;vertical-align:-2px;margin-right:6px;"></i>Save this search</h2>
+    <label style="display:block;margin-bottom:6px;">Search name</label>
+    <input type="text" id="save-name-input" placeholder="e.g. Senior DE Remote, Pre-IPO Visa Jobs…" onkeydown="if(event.key==='Enter')confirmSave()" />
+    <div class="save-modal-actions">
+      <button class="btn" onclick="closeSaveModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmSave()"><i class="ti ti-device-floppy"></i> Save</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  // ← YOUR CLOUDFLARE WORKER URL
   const PROXY_URL = 'https://job-agent-proxy.katiyaranamika.workers.dev';
 
   const applications = JSON.parse(localStorage.getItem('jsa_apps') || '[]');
+  let savedSearches = JSON.parse(localStorage.getItem('jsa_saved_searches') || '[]');
   const locations = [];
   const activeStages = new Set();
   let visaOnly = false;
-  renderTracker();
 
+  renderTracker();
+  renderSavedSearches();
+
+  // ── Location tags ──
   function handleLocKey(e) {
     if (e.key === 'Enter' || e.key === ',') {
       e.preventDefault();
@@ -276,6 +324,7 @@
       `<span class="loc-tag">${l}<button onclick="removeLocation(${i})" aria-label="Remove ${l}"><i class="ti ti-x" style="font-size:11px;"></i></button></span>`).join('');
   }
 
+  // ── Stage toggles ──
   function toggleStage(s) {
     if (activeStages.has(s)) activeStages.delete(s); else activeStages.add(s);
     ['public','private','preipo'].forEach(st => {
@@ -283,17 +332,20 @@
     });
   }
 
+  // ── Visa toggle ──
   function toggleVisa() {
     visaOnly = !visaOnly;
     document.getElementById('visa-toggle').className = 'tog-btn' + (visaOnly ? ' active-visa' : '');
     document.getElementById('visa-note').style.display = visaOnly ? 'block' : 'none';
   }
 
+  // ── Tab switching ──
   function switchTab(name) {
     document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['search','tracker','email'][i] === name));
     document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-'+name));
   }
 
+  // ── Status messages ──
   function setStatus(elId, type, msg, showSpinner) {
     const el = document.getElementById(elId);
     if (!msg) { el.innerHTML = ''; return; }
@@ -302,6 +354,7 @@
     el.innerHTML = `<div class="status-box status-${type}">${icon}<span>${msg}</span></div>`;
   }
 
+  // ── Claude API ──
   async function callClaude(prompt, statusElId, btnId) {
     const btn = document.getElementById(btnId);
     btn.disabled = true;
@@ -310,11 +363,7 @@
       const res = await fetch(PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-6',
-          max_tokens: 2500,
-          messages: [{ role: 'user', content: prompt }]
-        })
+        body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 2500, messages: [{ role: 'user', content: prompt }] })
       });
       if (!res.ok) {
         const err = await res.text();
@@ -333,6 +382,106 @@
     }
   }
 
+  // ── Saved searches ──
+  function getCurrentFilters() {
+    return {
+      title: document.getElementById('search-title').value.trim(),
+      level: document.getElementById('search-level').value,
+      locations: [...locations],
+      stages: [...activeStages],
+      salary: document.getElementById('search-salary').value.trim(),
+      skills: document.getElementById('search-skills').value.trim(),
+      visaOnly
+    };
+  }
+
+  function applyFilters(f) {
+    document.getElementById('search-title').value = f.title || '';
+    document.getElementById('search-level').value = f.level || 'Mid level';
+    document.getElementById('search-salary').value = f.salary || '';
+    document.getElementById('search-skills').value = f.skills || '';
+
+    // locations
+    locations.length = 0;
+    (f.locations || []).forEach(l => locations.push(l));
+    renderLocTags();
+
+    // stages
+    activeStages.clear();
+    (f.stages || []).forEach(s => activeStages.add(s));
+    ['public','private','preipo'].forEach(st => {
+      document.getElementById('stage-'+st).className = 'tog-btn' + (activeStages.has(st) ? ' active-'+st : '');
+    });
+
+    // visa
+    visaOnly = !!f.visaOnly;
+    document.getElementById('visa-toggle').className = 'tog-btn' + (visaOnly ? ' active-visa' : '');
+    document.getElementById('visa-note').style.display = visaOnly ? 'block' : 'none';
+  }
+
+  function renderSavedSearches() {
+    const el = document.getElementById('saved-list');
+    if (!savedSearches.length) {
+      el.innerHTML = '<span class="empty-saved">No saved searches yet — fill in your filters and click "Save current".</span>';
+      return;
+    }
+    el.innerHTML = savedSearches.map((s, i) => {
+      const tags = [];
+      if (s.filters.title) tags.push(s.filters.title);
+      if (s.filters.locations && s.filters.locations.length) tags.push(s.filters.locations.join(', '));
+      if (s.filters.stages && s.filters.stages.length) tags.push(s.filters.stages.join('/'));
+      if (s.filters.visaOnly) tags.push('H1B');
+      return `<div class="saved-chip">
+        <button class="saved-chip-load" onclick="loadSearch(${i})" title="${tags.join(' · ')}">
+          <i class="ti ti-bookmark" style="font-size:12px;opacity:0.6;"></i>
+          <span style="font-weight:500;">${s.name}</span>
+          <span style="font-size:11px;color:var(--text3);margin-left:2px;">${tags.slice(0,2).join(' · ')}</span>
+        </button>
+        <button class="saved-chip-del" onclick="deleteSearch(${i})" title="Delete '${s.name}'"><i class="ti ti-x" style="font-size:11px;"></i></button>
+      </div>`;
+    }).join('');
+  }
+
+  function loadSearch(i) {
+    applyFilters(savedSearches[i].filters);
+    document.getElementById('search-results').innerHTML = '';
+    setStatus('search-status', 'success', `Loaded "${savedSearches[i].name}" — click Find matching jobs to search.`);
+    setTimeout(() => setStatus('search-status', '', ''), 3000);
+  }
+
+  function deleteSearch(i) {
+    if (!confirm(`Delete saved search "${savedSearches[i].name}"?`)) return;
+    savedSearches.splice(i, 1);
+    localStorage.setItem('jsa_saved_searches', JSON.stringify(savedSearches));
+    renderSavedSearches();
+  }
+
+  function openSaveModal() {
+    const f = getCurrentFilters();
+    if (!f.title) { setStatus('search-status','error','Add a job title before saving.'); return; }
+    document.getElementById('save-name-input').value = f.title + (f.locations.length ? ' · ' + f.locations[0] : '');
+    document.getElementById('save-modal-bg').classList.add('open');
+    setTimeout(() => document.getElementById('save-name-input').focus(), 80);
+  }
+
+  function closeSaveModal(e) {
+    if (!e || e.target === document.getElementById('save-modal-bg')) {
+      document.getElementById('save-modal-bg').classList.remove('open');
+    }
+  }
+
+  function confirmSave() {
+    const name = document.getElementById('save-name-input').value.trim();
+    if (!name) { document.getElementById('save-name-input').focus(); return; }
+    savedSearches.unshift({ name, filters: getCurrentFilters(), savedAt: new Date().toISOString() });
+    localStorage.setItem('jsa_saved_searches', JSON.stringify(savedSearches));
+    renderSavedSearches();
+    closeSaveModal();
+    setStatus('search-status', 'success', `Search "${name}" saved! Click it anytime to reload.`);
+    setTimeout(() => setStatus('search-status', '', ''), 3000);
+  }
+
+  // ── Job search ──
   async function searchJobs() {
     const title = document.getElementById('search-title').value.trim();
     if (!title) { setStatus('search-status','error','Please enter a job title first.'); return; }
@@ -348,8 +497,8 @@
     document.getElementById('search-results').innerHTML = '';
 
     const visaInstruction = visaOnly
-      ? `IMPORTANT — Visa filter ON: Only include companies with strong H1B sponsorship history. Exclude roles requiring US citizenship, security clearance, green card, or permanent residency. Set visaSponsorship to "Yes" only for confirmed sponsors.`
-      : `Assess each company's H1B sponsorship likelihood based on known history. Set visaSponsorship to "Yes", "Unlikely", or "Unknown".`;
+      ? `IMPORTANT — Visa filter ON: Only include companies with strong H1B sponsorship history. Exclude roles requiring US citizenship, security clearance, green card, or permanent residency.`
+      : `Assess each company's H1B sponsorship likelihood. Set visaSponsorship to "Yes", "Unlikely", or "Unknown".`;
 
     const prompt = `You are an expert tech job search assistant with deep knowledge of the US tech industry and H1B visa sponsorship patterns.
 
@@ -363,18 +512,10 @@ Generate 5 realistic tech/data job listings for:
 
 ${visaInstruction}
 
-Return ONLY a valid JSON array, no markdown, no backticks. Each object must have:
-- company (string)
-- title (string)
-- location (string)
-- salary (string e.g. "$130k–$160k")
-- match (integer 70-99)
-- stage (string: "Public", "Private", or "Pre-IPO")
-- tags (array of 3 strings)
-- summary (string: 2 sentences)
-- posted (string e.g. "2 days ago")
-- visaSponsorship (string: "Yes", "Unlikely", or "Unknown")
-- visaNote (string: 1 sentence on H1B history)
+Return ONLY a valid JSON array, no markdown, no backticks. Each object:
+- company, title, location, salary (e.g. "$130k–$160k"), match (70-99), stage ("Public"/"Private"/"Pre-IPO")
+- tags (array of 3 strings), summary (2 sentences), posted (e.g. "2 days ago")
+- visaSponsorship ("Yes"/"Unlikely"/"Unknown"), visaNote (1 sentence)
 - companySnapshot (object: founded, size, funding, mission)
 - newsBullets (array of 3 strings, each under 20 words)`;
 
@@ -425,9 +566,9 @@ Return ONLY a valid JSON array, no markdown, no backticks. Each object must have
           </div>
         </div>
         <div class="result-actions">
-          <button class="btn" style="font-size:13px;" onclick="trackJob('${job.company.replace(/'/g,"\\'")}','${job.title.replace(/'/g,"\\'")}')"><i class="ti ti-plus"></i> Track</button>
-          <button class="btn" style="font-size:13px;" onclick="draftForJob('${job.company.replace(/'/g,"\\'")}','${job.title.replace(/'/g,"\\'")}')"><i class="ti ti-mail"></i> Draft email</button>
-          <button class="btn" style="font-size:13px;" onclick="toggleInsights(${idx})"><i class="ti ti-building-community"></i> Company insights</button>
+          <button class="btn btn-sm" onclick="trackJob('${job.company.replace(/'/g,"\\'")}','${job.title.replace(/'/g,"\\'")}')"><i class="ti ti-plus"></i> Track</button>
+          <button class="btn btn-sm" onclick="draftForJob('${job.company.replace(/'/g,"\\'")}','${job.title.replace(/'/g,"\\'")}')"><i class="ti ti-mail"></i> Draft email</button>
+          <button class="btn btn-sm" onclick="toggleInsights(${idx})"><i class="ti ti-building-community"></i> Company insights</button>
         </div>
         <div class="company-insights" id="insights-${idx}">
           <div style="font-size:13px;font-weight:500;margin-bottom:8px;"><i class="ti ti-building-community" style="font-size:14px;vertical-align:-2px;"></i> ${job.company} — Company snapshot</div>
@@ -450,11 +591,12 @@ Return ONLY a valid JSON array, no markdown, no backticks. Each object must have
     el.style.display = el.style.display === 'block' ? 'none' : 'block';
   }
 
-  function save() { localStorage.setItem('jsa_apps', JSON.stringify(applications)); }
+  // ── Tracker ──
+  function saveApps() { localStorage.setItem('jsa_apps', JSON.stringify(applications)); }
 
   function trackJob(company, role) {
     applications.push({ company, role, status:'applied', date:new Date().toISOString().split('T')[0], notes:'' });
-    save(); renderTracker(); switchTab('tracker');
+    saveApps(); renderTracker(); switchTab('tracker');
   }
   function draftForJob(company, role) {
     document.getElementById('email-company').value = company;
@@ -471,11 +613,11 @@ Return ONLY a valid JSON array, no markdown, no backticks. Each object must have
     const role = document.getElementById('app-role').value.trim();
     if (!company || !role) { alert('Fill in company and role.'); return; }
     applications.push({ company, role, status:document.getElementById('app-status').value, date:document.getElementById('app-date').value, notes:document.getElementById('app-notes').value });
-    save(); renderTracker();
+    saveApps(); renderTracker();
     document.getElementById('add-app-form').style.display='none';
     ['app-company','app-role','app-notes'].forEach(id => document.getElementById(id).value='');
   }
-  function removeApp(i) { applications.splice(i,1); save(); renderTracker(); }
+  function removeApp(i) { applications.splice(i,1); saveApps(); renderTracker(); }
   function renderTracker() {
     document.getElementById('stat-total').textContent = applications.length;
     document.getElementById('stat-interviews').textContent = applications.filter(a=>a.status==='interviewing').length;
@@ -489,11 +631,12 @@ Return ONLY a valid JSON array, no markdown, no backticks. Each object must have
         <div style="flex:1;min-width:120px;"><div style="font-size:14px;font-weight:500;">${a.company}</div><div style="font-size:12px;color:var(--text2);">${a.role}</div></div>
         <span class="badge badge-${sb[a.status]}">${sl[a.status]}</span>
         <span style="font-size:12px;color:var(--text2);">${a.date}</span>
-        <button class="btn" style="font-size:12px;padding:4px 10px;" onclick="draftForJob('${a.company.replace(/'/g,"\\'")}','${a.role.replace(/'/g,"\\'")}')"><i class="ti ti-mail"></i></button>
-        <button class="btn" style="font-size:12px;padding:4px 10px;" onclick="removeApp(${i})"><i class="ti ti-trash"></i></button>
+        <button class="btn btn-sm" onclick="draftForJob('${a.company.replace(/'/g,"\\'")}','${a.role.replace(/'/g,"\\'")}')"><i class="ti ti-mail"></i></button>
+        <button class="btn btn-sm" onclick="removeApp(${i})"><i class="ti ti-trash"></i></button>
       </div>`).join('')+'</div>';
   }
 
+  // ── Email ──
   async function draftEmail() {
     const company = document.getElementById('email-company').value.trim();
     const role = document.getElementById('email-role').value.trim();
