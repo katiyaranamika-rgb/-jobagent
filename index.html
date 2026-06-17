@@ -50,11 +50,7 @@
     .row { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
     .field { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 140px; }
     label { font-size: 12px; color: var(--text2); font-weight: 500; letter-spacing: 0.02em; }
-    input, select, textarea {
-      font-size: 14px; padding: 8px 10px; border: 0.5px solid var(--border2);
-      border-radius: var(--radius); background: var(--bg); color: var(--text);
-      outline: none; font-family: inherit; width: 100%;
-    }
+    input, select, textarea { font-size: 14px; padding: 8px 10px; border: 0.5px solid var(--border2); border-radius: var(--radius); background: var(--bg); color: var(--text); outline: none; font-family: inherit; width: 100%; }
     input:focus, select:focus, textarea:focus { border-color: var(--text2); box-shadow: 0 0 0 2px rgba(0,0,0,0.06); }
     textarea { resize: vertical; min-height: 72px; }
     .btn { padding: 8px 16px; font-size: 14px; border-radius: var(--radius); cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text); font-family: inherit; }
@@ -69,7 +65,6 @@
     .badge-gray { background: var(--gray-bg); color: var(--gray-text); }
     .badge-purple { background: var(--purple-bg); color: var(--purple-text); }
     .badge-teal { background: var(--teal-bg); color: var(--teal-text); }
-    .badge-pink { background: var(--pink-bg); color: var(--pink-text); }
     .result-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.1rem 1.25rem; margin-bottom: 14px; }
     .job-title { font-size: 15px; font-weight: 500; }
     .job-meta { font-size: 13px; color: var(--text2); margin-top: 3px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -79,9 +74,13 @@
     .insight-block { background: var(--bg2); border-radius: var(--radius); padding: 10px 12px; font-size: 13px; line-height: 1.6; }
     .insight-label { font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
     .news-list { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
-    .news-item { background: var(--bg2); border-radius: var(--radius); padding: 10px 12px; font-size: 13px; line-height: 1.5; }
-    .news-item .news-title { font-weight: 500; color: var(--text); margin-bottom: 3px; }
-    .news-item .news-summary { color: var(--text2); font-size: 12px; }
+    .news-item { background: var(--bg2); border-radius: var(--radius); padding: 10px 12px; font-size: 13px; line-height: 1.5; color: var(--text2); }
+    /* visa banner */
+    .visa-banner { border-radius: var(--radius); padding: 8px 12px; font-size: 12px; font-weight: 500; display: flex; align-items: center; gap: 7px; margin-top: 10px; }
+    .visa-yes  { background: var(--green-bg);  color: var(--green-text); }
+    .visa-no   { background: var(--red-bg);    color: var(--red-text); }
+    .visa-unknown { background: var(--amber-bg); color: var(--amber-text); }
+    /* stat grid */
     .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem; }
     .stat { background: var(--bg2); border-radius: var(--radius); padding: 1rem; }
     .stat-num { font-size: 24px; font-weight: 500; }
@@ -89,28 +88,26 @@
     .tracker-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid var(--border); flex-wrap: wrap; }
     .tracker-row:last-child { border-bottom: none; }
     .status-box { border-radius: var(--radius); padding: 10px 14px; font-size: 13px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-    .status-info { background: var(--blue-bg); color: var(--blue-text); }
-    .status-error { background: var(--red-bg); color: var(--red-text); }
+    .status-info    { background: var(--blue-bg);  color: var(--blue-text); }
+    .status-error   { background: var(--red-bg);   color: var(--red-text); }
     .status-success { background: var(--green-bg); color: var(--green-text); }
     .spinner { width: 15px; height: 15px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .ai-output { background: var(--bg2); border-radius: var(--radius); padding: 14px; font-size: 13px; line-height: 1.7; margin-top: 10px; white-space: pre-wrap; display: none; }
     .empty-state { text-align: center; padding: 2.5rem; color: var(--text2); font-size: 14px; }
-    /* location tags */
     .loc-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; min-height: 28px; }
     .loc-tag { display: inline-flex; align-items: center; gap: 5px; background: var(--blue-bg); color: var(--blue-text); border-radius: 99px; font-size: 12px; padding: 3px 10px; }
     .loc-tag button { background: none; border: none; cursor: pointer; color: inherit; font-size: 13px; line-height: 1; padding: 0; display: flex; align-items: center; }
-    /* stage toggles */
-    .stage-toggles { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-    .stage-btn { padding: 5px 14px; font-size: 13px; border-radius: 99px; cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text2); font-family: inherit; transition: all 0.15s; }
-    .stage-btn.active-public { background: var(--green-bg); color: var(--green-text); border-color: var(--green-text); }
-    .stage-btn.active-private { background: var(--purple-bg); color: var(--purple-text); border-color: var(--purple-text); }
-    .stage-btn.active-preipo { background: var(--amber-bg); color: var(--amber-text); border-color: var(--amber-text); }
-    .section-title { font-size: 15px; font-weight: 500; margin-bottom: 12px; }
-    .divider { border: none; border-top: 0.5px solid var(--border); margin: 14px 0; }
-    .stage-badge-public { background: var(--green-bg); color: var(--green-text); }
+    .toggle-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+    .tog-btn { padding: 5px 14px; font-size: 13px; border-radius: 99px; cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text2); font-family: inherit; transition: all 0.15s; }
+    .tog-btn.active-public  { background: var(--green-bg);  color: var(--green-text);  border-color: var(--green-text); }
+    .tog-btn.active-private { background: var(--purple-bg); color: var(--purple-text); border-color: var(--purple-text); }
+    .tog-btn.active-preipo  { background: var(--amber-bg);  color: var(--amber-text);  border-color: var(--amber-text); }
+    .tog-btn.active-visa    { background: var(--teal-bg);   color: var(--teal-text);   border-color: var(--teal-text); }
+    .stage-badge-public  { background: var(--green-bg);  color: var(--green-text); }
     .stage-badge-private { background: var(--purple-bg); color: var(--purple-text); }
-    .stage-badge-preipo { background: var(--amber-bg); color: var(--amber-text); }
+    .stage-badge-preipo  { background: var(--amber-bg);  color: var(--amber-text); }
+    .info-note { font-size: 12px; color: var(--text3); margin-top: 5px; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -153,23 +150,31 @@
 
       <div class="field" style="margin-bottom:12px;">
         <label>Locations — type and press Enter to add multiple</label>
-        <input type="text" id="loc-input" placeholder="e.g. San Francisco, Remote, New York…" onkeydown="handleLocKey(event)" />
+        <input type="text" id="loc-input" placeholder="e.g. San Francisco · Remote · New York…" onkeydown="handleLocKey(event)" />
         <div class="loc-tags" id="loc-tags"></div>
       </div>
 
       <div class="row">
         <div class="field">
           <label>Company stage — select all that apply</label>
-          <div class="stage-toggles">
-            <button class="stage-btn" id="stage-public" onclick="toggleStage('public')"><i class="ti ti-building-bank"></i> Public</button>
-            <button class="stage-btn" id="stage-private" onclick="toggleStage('private')"><i class="ti ti-lock"></i> Private</button>
-            <button class="stage-btn" id="stage-preipo" onclick="toggleStage('preipo')"><i class="ti ti-rocket"></i> Pre-IPO</button>
+          <div class="toggle-row">
+            <button class="tog-btn" id="stage-public"  onclick="toggleStage('public')" ><i class="ti ti-building-bank"></i> Public</button>
+            <button class="tog-btn" id="stage-private" onclick="toggleStage('private')"><i class="ti ti-lock"></i> Private</button>
+            <button class="tog-btn" id="stage-preipo"  onclick="toggleStage('preipo')" ><i class="ti ti-rocket"></i> Pre-IPO</button>
           </div>
         </div>
         <div class="field">
           <label>Min salary (USD)</label>
           <input type="text" id="search-salary" placeholder="e.g. 120,000" />
         </div>
+      </div>
+
+      <div class="field" style="margin-bottom:12px;">
+        <label>Visa sponsorship</label>
+        <div class="toggle-row">
+          <button class="tog-btn" id="visa-toggle" onclick="toggleVisa()"><i class="ti ti-passport"></i> H1B / Visa sponsorship only</button>
+        </div>
+        <div class="info-note" id="visa-note" style="display:none;"><i class="ti ti-info-circle" style="font-size:12px;vertical-align:-1px;"></i> Results will include companies known to sponsor H1B visas and exclude roles that require US citizenship, green card, or permanent residency.</div>
       </div>
 
       <div class="field" style="margin-bottom:14px;">
@@ -193,7 +198,7 @@
       <div class="stat"><div class="stat-num" id="stat-offers">0</div><div class="stat-lbl">Offers</div></div>
     </div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-      <span class="section-title" style="margin:0;">Applications</span>
+      <span style="font-size:15px;font-weight:500;">Applications</span>
       <button class="btn" onclick="showAddApp()"><i class="ti ti-plus"></i> Add</button>
     </div>
     <div id="add-app-form" class="card" style="display:none;">
@@ -241,7 +246,7 @@
       </div>
       <div class="field" style="margin-bottom:14px;">
         <label>Why this company? (optional)</label>
-        <textarea id="email-why" placeholder="e.g. I admire their data infrastructure work and open-source contributions..."></textarea>
+        <textarea id="email-why" placeholder="e.g. I admire their data infrastructure and open-source work..."></textarea>
       </div>
       <button class="btn btn-primary" id="email-btn" onclick="draftEmail()">
         <i class="ti ti-sparkles"></i> Draft outreach email
@@ -256,43 +261,42 @@
 const applications = JSON.parse(localStorage.getItem('jsa_apps') || '[]');
 const locations = [];
 const activeStages = new Set();
+let visaOnly = false;
 renderTracker();
 
-// --- Location tag input ---
 function handleLocKey(e) {
   if (e.key === 'Enter' || e.key === ',') {
     e.preventDefault();
     const val = e.target.value.trim().replace(/,$/, '');
-    if (val && !locations.includes(val)) {
-      locations.push(val);
-      renderLocTags();
-    }
+    if (val && !locations.includes(val)) { locations.push(val); renderLocTags(); }
     e.target.value = '';
   }
 }
 function removeLocation(i) { locations.splice(i,1); renderLocTags(); }
 function renderLocTags() {
-  const el = document.getElementById('loc-tags');
-  el.innerHTML = locations.map((l,i) => `<span class="loc-tag">${l}<button onclick="removeLocation(${i})" aria-label="Remove ${l}"><i class="ti ti-x" style="font-size:11px;"></i></button></span>`).join('');
+  document.getElementById('loc-tags').innerHTML = locations.map((l,i) =>
+    `<span class="loc-tag">${l}<button onclick="removeLocation(${i})" aria-label="Remove ${l}"><i class="ti ti-x" style="font-size:11px;"></i></button></span>`).join('');
 }
 
-// --- Stage toggles ---
 function toggleStage(s) {
-  if (activeStages.has(s)) activeStages.delete(s);
-  else activeStages.add(s);
+  if (activeStages.has(s)) activeStages.delete(s); else activeStages.add(s);
   ['public','private','preipo'].forEach(st => {
-    const btn = document.getElementById('stage-'+st);
-    btn.className = 'stage-btn' + (activeStages.has(st) ? ' active-'+st : '');
+    document.getElementById('stage-'+st).className = 'tog-btn' + (activeStages.has(st) ? ' active-'+st : '');
   });
 }
 
-// --- Tab switching ---
+function toggleVisa() {
+  visaOnly = !visaOnly;
+  const btn = document.getElementById('visa-toggle');
+  btn.className = 'tog-btn' + (visaOnly ? ' active-visa' : '');
+  document.getElementById('visa-note').style.display = visaOnly ? 'block' : 'none';
+}
+
 function switchTab(name) {
   document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['search','tracker','email'][i] === name));
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-'+name));
 }
 
-// --- Status messages ---
 function setStatus(elId, type, msg, showSpinner) {
   const el = document.getElementById(elId);
   if (!msg) { el.innerHTML = ''; return; }
@@ -301,7 +305,6 @@ function setStatus(elId, type, msg, showSpinner) {
   el.innerHTML = `<div class="status-box status-${type}">${icon}<span>${msg}</span></div>`;
 }
 
-// --- Claude API call ---
 async function callClaude(prompt, statusElId, btnId) {
   const btn = document.getElementById(btnId);
   btn.disabled = true;
@@ -310,7 +313,7 @@ async function callClaude(prompt, statusElId, btnId) {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 2000, messages: [{ role: "user", content: prompt }] })
+      body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 2500, messages: [{ role: "user", content: prompt }] })
     });
     if (!res.ok) {
       const err = await res.text();
@@ -329,50 +332,54 @@ async function callClaude(prompt, statusElId, btnId) {
   }
 }
 
-// --- Job search ---
 async function searchJobs() {
   const title = document.getElementById('search-title').value.trim();
   if (!title) { setStatus('search-status','error','Please enter a job title first.'); return; }
 
-  // collect locations — also grab any unsubmitted text in the input
   const rawLoc = document.getElementById('loc-input').value.trim();
   if (rawLoc && !locations.includes(rawLoc)) { locations.push(rawLoc); document.getElementById('loc-input').value=''; renderLocTags(); }
   const locs = locations.length ? locations : ['Remote'];
-
   const level = document.getElementById('search-level').value;
   const salary = document.getElementById('search-salary').value;
   const skills = document.getElementById('search-skills').value;
-  const stages = activeStages.size ? [...activeStages].join(', ') : 'any (public, private, pre-IPO)';
+  const stages = activeStages.size ? [...activeStages].join(', ') : 'any';
 
   document.getElementById('search-results').innerHTML = '';
 
-  const prompt = `You are an expert tech job search assistant with deep knowledge of the tech industry as of early 2025.
+  const visaInstruction = visaOnly
+    ? `IMPORTANT — Visa sponsorship filter is ON:
+- Only include companies with a strong track record of sponsoring H1B visas (e.g. large tech companies, well-funded startups that regularly hire international talent).
+- Exclude any role that typically requires US citizenship, security clearance, green card, or permanent residency (e.g. defense contractors, government roles, roles with "must be authorized to work" only).
+- For each job, set visaSponsorship to "Yes" or "Unlikely" based on the company's known H1B history.
+- In the visaNote field, give a 1-sentence reason (e.g. "Google has sponsored thousands of H1Bs annually" or "This company rarely appears in H1B disclosure data").`
+    : `For each job, assess visa sponsorship likelihood based on the company's known H1B history. Set visaSponsorship to "Yes", "Unlikely", or "Unknown". Give a brief visaNote.`;
 
-Generate 5 realistic, specific tech/data job listings matching these criteria:
+  const prompt = `You are an expert tech job search assistant with deep knowledge of the US tech industry and H1B visa sponsorship patterns.
+
+Generate 5 realistic tech/data job listings for:
 - Role: ${title}
-- Locations: ${locs.join(', ')} (spread results across these locations where possible)
-- Experience level: ${level}
-- Company stage preference: ${stages}
-- ${salary ? 'Min salary: $'+salary : 'Any salary range'}
-- ${skills ? 'Candidate skills: '+skills : ''}
+- Locations: ${locs.join(', ')} (spread across these)
+- Level: ${level}
+- Company stage: ${stages}
+- ${salary ? 'Min salary: $'+salary : 'Any salary'}
+- ${skills ? 'Skills: '+skills : ''}
 
-For each job, also provide:
-1. Company stage (Public / Private / Pre-IPO) based on your knowledge of real companies
-2. Recent company news/insights (funding rounds, product launches, layoffs, growth — whatever is most relevant and recent you know about)
-3. 2-3 short news bullets about the company
+${visaInstruction}
 
-Return ONLY a valid JSON array, no markdown, no backticks. Each object must have exactly these fields:
-- company (string: real well-known tech company name)
-- title (string: specific job title)
-- location (string: one of the requested locations or Remote)
-- salary (string: realistic range e.g. "$130k–$160k")
-- match (integer: 70-99, skill match score)
-- stage (string: exactly one of "Public", "Private", "Pre-IPO")
+Return ONLY a valid JSON array, no markdown, no backticks. Each object must have:
+- company (string)
+- title (string)
+- location (string: one of the requested locations)
+- salary (string: e.g. "$130k–$160k")
+- match (integer: 70-99)
+- stage (string: "Public", "Private", or "Pre-IPO")
 - tags (array of 3 strings: tech stack)
 - summary (string: 2 sentences about the role)
 - posted (string: e.g. "2 days ago")
-- companySnapshot (object with keys: founded, size, funding, mission — each a short string)
-- newsBullets (array of exactly 3 strings: recent notable facts/news about the company, each under 20 words)`;
+- visaSponsorship (string: "Yes", "Unlikely", or "Unknown")
+- visaNote (string: 1 sentence on H1B history or work auth requirements)
+- companySnapshot (object: founded, size, funding, mission — each a short string)
+- newsBullets (array of 3 strings: recent notable facts, each under 20 words)`;
 
   const text = await callClaude(prompt, 'search-status', 'search-btn');
   if (!text) return;
@@ -388,6 +395,12 @@ Return ONLY a valid JSON array, no markdown, no backticks. Each object must have
     const mc = job.match >= 85 ? 'green' : job.match >= 75 ? 'amber' : 'blue';
     const stageBadgeClass = job.stage === 'Public' ? 'stage-badge-public' : job.stage === 'Pre-IPO' ? 'stage-badge-preipo' : 'stage-badge-private';
     const stageIcon = job.stage === 'Public' ? 'ti-building-bank' : job.stage === 'Pre-IPO' ? 'ti-rocket' : 'ti-lock';
+
+    const vs = job.visaSponsorship || 'Unknown';
+    const visaClass = vs === 'Yes' ? 'visa-yes' : vs === 'Unlikely' ? 'visa-no' : 'visa-unknown';
+    const visaIcon = vs === 'Yes' ? 'ti-circle-check' : vs === 'Unlikely' ? 'ti-circle-x' : 'ti-help-circle';
+    const visaLabel = vs === 'Yes' ? 'H1B sponsorship likely' : vs === 'Unlikely' ? 'Sponsorship unlikely / US auth required' : 'Sponsorship status unknown';
+
     const snap = job.companySnapshot || {};
     const news = job.newsBullets || [];
 
@@ -411,6 +424,14 @@ Return ONLY a valid JSON array, no markdown, no backticks. Each object must have
       <div style="display:flex;gap:6px;margin:8px 0;flex-wrap:wrap;">${job.tags.map(t=>`<span class="badge badge-gray">${t}</span>`).join('')}</div>
       <div style="font-size:13px;color:var(--text2);line-height:1.6;">${job.summary}</div>
 
+      <div class="visa-banner ${visaClass}">
+        <i class="ti ${visaIcon}" style="font-size:15px;flex-shrink:0;"></i>
+        <div>
+          <div style="font-weight:500;">${visaLabel}</div>
+          <div style="font-size:11px;font-weight:400;margin-top:2px;opacity:0.85;">${job.visaNote || ''}</div>
+        </div>
+      </div>
+
       <div class="result-actions">
         <button class="btn" style="font-size:13px;" onclick="trackJob('${job.company.replace(/'/g,"\\'")}','${job.title.replace(/'/g,"\\'")}')"><i class="ti ti-plus"></i> Track</button>
         <button class="btn" style="font-size:13px;" onclick="draftForJob('${job.company.replace(/'/g,"\\'")}','${job.title.replace(/'/g,"\\'")}')"><i class="ti ti-mail"></i> Draft email</button>
@@ -421,15 +442,13 @@ Return ONLY a valid JSON array, no markdown, no backticks. Each object must have
         <div style="font-size:13px;font-weight:500;margin-bottom:8px;"><i class="ti ti-building-community" style="font-size:14px;vertical-align:-2px;"></i> ${job.company} — Company snapshot</div>
         <div class="insights-grid">
           ${snap.founded ? `<div class="insight-block"><div class="insight-label">Founded</div>${snap.founded}</div>` : ''}
-          ${snap.size ? `<div class="insight-block"><div class="insight-label">Team size</div>${snap.size}</div>` : ''}
+          ${snap.size    ? `<div class="insight-block"><div class="insight-label">Team size</div>${snap.size}</div>` : ''}
           ${snap.funding ? `<div class="insight-block"><div class="insight-label">Funding / status</div>${snap.funding}</div>` : ''}
           ${snap.mission ? `<div class="insight-block" style="grid-column:span 2"><div class="insight-label">Mission</div>${snap.mission}</div>` : ''}
         </div>
         ${news.length ? `
         <div style="font-size:13px;font-weight:500;margin:12px 0 8px;"><i class="ti ti-news" style="font-size:14px;vertical-align:-2px;"></i> Recent news &amp; highlights</div>
-        <div class="news-list">
-          ${news.map(n => `<div class="news-item"><div class="news-title"><i class="ti ti-point-filled" style="font-size:10px;color:var(--text3);vertical-align:1px;margin-right:4px;"></i>${n}</div></div>`).join('')}
-        </div>` : ''}
+        <div class="news-list">${news.map(n=>`<div class="news-item"><i class="ti ti-point-filled" style="font-size:10px;color:var(--text3);vertical-align:1px;margin-right:4px;"></i>${n}</div>`).join('')}</div>` : ''}
       </div>
     </div>`;
   });
@@ -440,7 +459,6 @@ function toggleInsights(idx) {
   el.style.display = el.style.display === 'block' ? 'none' : 'block';
 }
 
-// --- Tracker ---
 function save() { localStorage.setItem('jsa_apps', JSON.stringify(applications)); }
 
 function trackJob(company, role) {
@@ -485,18 +503,17 @@ function renderTracker() {
     </div>`).join('')+'</div>';
 }
 
-// --- Email draft ---
 async function draftEmail() {
   const company = document.getElementById('email-company').value.trim();
   const role = document.getElementById('email-role').value.trim();
   if (!company || !role) { setStatus('email-status','error','Fill in the target company and role.'); return; }
-  const prompt = `Write a concise cold outreach email for a tech job seeker.
+  const prompt = `Write a concise cold outreach email for a tech job seeker seeking H1B visa sponsorship.
 From: ${document.getElementById('email-yourname').value||'the candidate'}
 Background: ${document.getElementById('email-bg').value||'a tech professional'}
 To: ${document.getElementById('email-toname').value||'hiring team'} at ${company}
 Role: ${role}
 ${document.getElementById('email-why').value?'Why this company: '+document.getElementById('email-why').value:''}
-Keep it under 180 words. Start with "Subject: ..." on line 1, then the email body. Warm, specific, ready to send. No placeholder brackets.`;
+Keep it under 180 words. Start with "Subject: ..." on line 1, then the email body. Mention visa sponsorship naturally but confidently — not apologetically. Warm, specific, ready to send. No placeholder brackets.`;
   document.getElementById('email-output').style.display='none';
   const text = await callClaude(prompt,'email-status','email-btn');
   if (!text) return;
