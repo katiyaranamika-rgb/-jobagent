@@ -17,6 +17,9 @@
       --amber-bg: #FAEEDA; --amber-text: #633806;
       --red-bg: #FCEBEB; --red-text: #791F1F;
       --gray-bg: #F1EFE8; --gray-text: #444441;
+      --purple-bg: #EEEDFE; --purple-text: #3C3489;
+      --teal-bg: #E1F5EE; --teal-text: #085041;
+      --pink-bg: #FBEAF0; --pink-text: #72243E;
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -28,43 +31,57 @@
         --amber-bg: #412402; --amber-text: #FAC775;
         --red-bg: #501313; --red-text: #F7C1C1;
         --gray-bg: #2C2C2A; --gray-text: #D3D1C7;
+        --purple-bg: #26215C; --purple-text: #CECBF6;
+        --teal-bg: #04342C; --teal-text: #9FE1CB;
+        --pink-bg: #4B1528; --pink-text: #F4C0D1;
       }
     }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg3); color: var(--text); min-height: 100vh; }
-    .app-header { background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 1rem 1.5rem; display: flex; align-items: center; gap: 12px; }
-    .app-header h1 { font-size: 17px; font-weight: 500; }
-    .app-header .subtitle { font-size: 13px; color: var(--text2); }
-    .logo { width: 32px; height: 32px; background: var(--text); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--bg); font-size: 16px; }
-    .container { max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+    .app-header { background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 1rem 1.5rem; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 10; }
+    .logo { width: 34px; height: 34px; background: var(--text); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--bg); font-size: 17px; flex-shrink: 0; }
+    .app-header h1 { font-size: 16px; font-weight: 500; }
+    .app-header .sub { font-size: 12px; color: var(--text2); }
+    .container { max-width: 760px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
     .tabs { display: flex; gap: 4px; border-bottom: 0.5px solid var(--border); margin-bottom: 1.5rem; }
-    .tab { padding: 8px 16px; font-size: 14px; cursor: pointer; border: none; background: none; color: var(--text2); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+    .tab { padding: 8px 16px; font-size: 14px; cursor: pointer; border: none; background: none; color: var(--text2); border-bottom: 2px solid transparent; margin-bottom: -1px; font-family: inherit; display: flex; align-items: center; gap: 6px; }
     .tab.active { color: var(--text); font-weight: 500; border-bottom-color: var(--text); }
     .panel { display: none; } .panel.active { display: block; }
     .card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 12px; }
     .row { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
-    .field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 140px; }
-    label { font-size: 12px; color: var(--text2); }
+    .field { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 140px; }
+    label { font-size: 12px; color: var(--text2); font-weight: 500; letter-spacing: 0.02em; }
     input, select, textarea {
       font-size: 14px; padding: 8px 10px; border: 0.5px solid var(--border2);
       border-radius: var(--radius); background: var(--bg); color: var(--text);
       outline: none; font-family: inherit; width: 100%;
     }
     input:focus, select:focus, textarea:focus { border-color: var(--text2); box-shadow: 0 0 0 2px rgba(0,0,0,0.06); }
-    textarea { resize: vertical; min-height: 80px; }
-    .btn { padding: 8px 16px; font-size: 14px; border-radius: var(--radius); cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text); font-family: inherit; transition: opacity 0.15s; }
+    textarea { resize: vertical; min-height: 72px; }
+    .btn { padding: 8px 16px; font-size: 14px; border-radius: var(--radius); cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text); font-family: inherit; }
     .btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
-    .btn:hover { opacity: 0.8; }
+    .btn:hover:not(:disabled) { opacity: 0.78; }
     .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 99px; font-weight: 500; }
+    .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 99px; font-weight: 500; white-space: nowrap; }
     .badge-blue { background: var(--blue-bg); color: var(--blue-text); }
     .badge-green { background: var(--green-bg); color: var(--green-text); }
     .badge-amber { background: var(--amber-bg); color: var(--amber-text); }
     .badge-red { background: var(--red-bg); color: var(--red-text); }
     .badge-gray { background: var(--gray-bg); color: var(--gray-text); }
-    .result-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 10px; }
+    .badge-purple { background: var(--purple-bg); color: var(--purple-text); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal-text); }
+    .badge-pink { background: var(--pink-bg); color: var(--pink-text); }
+    .result-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.1rem 1.25rem; margin-bottom: 14px; }
     .job-title { font-size: 15px; font-weight: 500; }
-    .job-meta { font-size: 13px; color: var(--text2); margin-top: 2px; }
-    .result-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .job-meta { font-size: 13px; color: var(--text2); margin-top: 3px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .result-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .company-insights { margin-top: 12px; border-top: 0.5px solid var(--border); padding-top: 12px; display: none; }
+    .insights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .insight-block { background: var(--bg2); border-radius: var(--radius); padding: 10px 12px; font-size: 13px; line-height: 1.6; }
+    .insight-label { font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .news-list { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+    .news-item { background: var(--bg2); border-radius: var(--radius); padding: 10px 12px; font-size: 13px; line-height: 1.5; }
+    .news-item .news-title { font-weight: 500; color: var(--text); margin-bottom: 3px; }
+    .news-item .news-summary { color: var(--text2); font-size: 12px; }
     .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem; }
     .stat { background: var(--bg2); border-radius: var(--radius); padding: 1rem; }
     .stat-num { font-size: 24px; font-weight: 500; }
@@ -79,7 +96,21 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .ai-output { background: var(--bg2); border-radius: var(--radius); padding: 14px; font-size: 13px; line-height: 1.7; margin-top: 10px; white-space: pre-wrap; display: none; }
     .empty-state { text-align: center; padding: 2.5rem; color: var(--text2); font-size: 14px; }
-    .section-label { font-size: 16px; font-weight: 500; margin-bottom: 12px; }
+    /* location tags */
+    .loc-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; min-height: 28px; }
+    .loc-tag { display: inline-flex; align-items: center; gap: 5px; background: var(--blue-bg); color: var(--blue-text); border-radius: 99px; font-size: 12px; padding: 3px 10px; }
+    .loc-tag button { background: none; border: none; cursor: pointer; color: inherit; font-size: 13px; line-height: 1; padding: 0; display: flex; align-items: center; }
+    /* stage toggles */
+    .stage-toggles { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+    .stage-btn { padding: 5px 14px; font-size: 13px; border-radius: 99px; cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text2); font-family: inherit; transition: all 0.15s; }
+    .stage-btn.active-public { background: var(--green-bg); color: var(--green-text); border-color: var(--green-text); }
+    .stage-btn.active-private { background: var(--purple-bg); color: var(--purple-text); border-color: var(--purple-text); }
+    .stage-btn.active-preipo { background: var(--amber-bg); color: var(--amber-text); border-color: var(--amber-text); }
+    .section-title { font-size: 15px; font-weight: 500; margin-bottom: 12px; }
+    .divider { border: none; border-top: 0.5px solid var(--border); margin: 14px 0; }
+    .stage-badge-public { background: var(--green-bg); color: var(--green-text); }
+    .stage-badge-private { background: var(--purple-bg); color: var(--purple-text); }
+    .stage-badge-preipo { background: var(--amber-bg); color: var(--amber-text); }
   </style>
 </head>
 <body>
@@ -87,8 +118,8 @@
 <div class="app-header">
   <div class="logo"><i class="ti ti-briefcase"></i></div>
   <div>
-    <div class="app-header h1" style="font-size:17px;font-weight:500;">Job Search Agent</div>
-    <div class="subtitle">AI-powered · Tech &amp; Data roles</div>
+    <h1>Job Search Agent</h1>
+    <div class="sub">AI-powered · Tech &amp; Data roles</div>
   </div>
 </div>
 
@@ -102,17 +133,12 @@
   <!-- SEARCH -->
   <div id="panel-search" class="panel active">
     <div class="card">
+
       <div class="row">
-        <div class="field">
+        <div class="field" style="flex:2;min-width:200px;">
           <label>Job title / keywords *</label>
           <input type="text" id="search-title" placeholder="e.g. Data Engineer, ML Engineer" />
         </div>
-        <div class="field">
-          <label>Location</label>
-          <input type="text" id="search-loc" value="Remote" placeholder="e.g. San Francisco, Remote" />
-        </div>
-      </div>
-      <div class="row">
         <div class="field">
           <label>Experience level</label>
           <select id="search-level">
@@ -120,17 +146,37 @@
             <option selected>Mid level</option>
             <option>Senior</option>
             <option>Staff / Principal</option>
+            <option>Manager / Director</option>
           </select>
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom:12px;">
+        <label>Locations — type and press Enter to add multiple</label>
+        <input type="text" id="loc-input" placeholder="e.g. San Francisco, Remote, New York…" onkeydown="handleLocKey(event)" />
+        <div class="loc-tags" id="loc-tags"></div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Company stage — select all that apply</label>
+          <div class="stage-toggles">
+            <button class="stage-btn" id="stage-public" onclick="toggleStage('public')"><i class="ti ti-building-bank"></i> Public</button>
+            <button class="stage-btn" id="stage-private" onclick="toggleStage('private')"><i class="ti ti-lock"></i> Private</button>
+            <button class="stage-btn" id="stage-preipo" onclick="toggleStage('preipo')"><i class="ti ti-rocket"></i> Pre-IPO</button>
+          </div>
         </div>
         <div class="field">
           <label>Min salary (USD)</label>
           <input type="text" id="search-salary" placeholder="e.g. 120,000" />
         </div>
       </div>
+
       <div class="field" style="margin-bottom:14px;">
         <label>Your skills (comma-separated)</label>
         <input type="text" id="search-skills" placeholder="e.g. Python, SQL, dbt, Spark, AWS" />
       </div>
+
       <button class="btn btn-primary" id="search-btn" onclick="searchJobs()">
         <i class="ti ti-sparkles"></i> Find matching jobs
       </button>
@@ -147,7 +193,7 @@
       <div class="stat"><div class="stat-num" id="stat-offers">0</div><div class="stat-lbl">Offers</div></div>
     </div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-      <span class="section-label" style="margin:0;">Applications</span>
+      <span class="section-title" style="margin:0;">Applications</span>
       <button class="btn" onclick="showAddApp()"><i class="ti ti-plus"></i> Add</button>
     </div>
     <div id="add-app-form" class="card" style="display:none;">
@@ -183,7 +229,7 @@
     <div class="card">
       <div class="row">
         <div class="field"><label>Your name</label><input type="text" id="email-yourname" placeholder="Your full name" /></div>
-        <div class="field"><label>Your background</label><input type="text" id="email-bg" placeholder="e.g. 3 years as Data Analyst" /></div>
+        <div class="field"><label>Your background</label><input type="text" id="email-bg" placeholder="e.g. 3 years as Data Analyst at a startup" /></div>
       </div>
       <div class="row">
         <div class="field"><label>Recruiter name (optional)</label><input type="text" id="email-toname" placeholder="e.g. Sarah" /></div>
@@ -195,7 +241,7 @@
       </div>
       <div class="field" style="margin-bottom:14px;">
         <label>Why this company? (optional)</label>
-        <textarea id="email-why" placeholder="e.g. I admire their data infrastructure work..."></textarea>
+        <textarea id="email-why" placeholder="e.g. I admire their data infrastructure work and open-source contributions..."></textarea>
       </div>
       <button class="btn btn-primary" id="email-btn" onclick="draftEmail()">
         <i class="ti ti-sparkles"></i> Draft outreach email
@@ -208,15 +254,45 @@
 
 <script>
 const applications = JSON.parse(localStorage.getItem('jsa_apps') || '[]');
+const locations = [];
+const activeStages = new Set();
 renderTracker();
 
-function save() { localStorage.setItem('jsa_apps', JSON.stringify(applications)); }
+// --- Location tag input ---
+function handleLocKey(e) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = e.target.value.trim().replace(/,$/, '');
+    if (val && !locations.includes(val)) {
+      locations.push(val);
+      renderLocTags();
+    }
+    e.target.value = '';
+  }
+}
+function removeLocation(i) { locations.splice(i,1); renderLocTags(); }
+function renderLocTags() {
+  const el = document.getElementById('loc-tags');
+  el.innerHTML = locations.map((l,i) => `<span class="loc-tag">${l}<button onclick="removeLocation(${i})" aria-label="Remove ${l}"><i class="ti ti-x" style="font-size:11px;"></i></button></span>`).join('');
+}
 
+// --- Stage toggles ---
+function toggleStage(s) {
+  if (activeStages.has(s)) activeStages.delete(s);
+  else activeStages.add(s);
+  ['public','private','preipo'].forEach(st => {
+    const btn = document.getElementById('stage-'+st);
+    btn.className = 'stage-btn' + (activeStages.has(st) ? ' active-'+st : '');
+  });
+}
+
+// --- Tab switching ---
 function switchTab(name) {
   document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['search','tracker','email'][i] === name));
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-'+name));
 }
 
+// --- Status messages ---
 function setStatus(elId, type, msg, showSpinner) {
   const el = document.getElementById(elId);
   if (!msg) { el.innerHTML = ''; return; }
@@ -225,6 +301,7 @@ function setStatus(elId, type, msg, showSpinner) {
   el.innerHTML = `<div class="status-box status-${type}">${icon}<span>${msg}</span></div>`;
 }
 
+// --- Claude API call ---
 async function callClaude(prompt, statusElId, btnId) {
   const btn = document.getElementById(btnId);
   btn.disabled = true;
@@ -233,11 +310,11 @@ async function callClaude(prompt, statusElId, btnId) {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 1000, messages: [{ role: "user", content: prompt }] })
+      body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 2000, messages: [{ role: "user", content: prompt }] })
     });
     if (!res.ok) {
       const err = await res.text();
-      setStatus(statusElId, 'error', `API error ${res.status}: ${err.slice(0,120)}`);
+      setStatus(statusElId, 'error', `API error ${res.status}: ${err.slice(0,140)}`);
       btn.disabled = false; return null;
     }
     const data = await res.json();
@@ -252,43 +329,119 @@ async function callClaude(prompt, statusElId, btnId) {
   }
 }
 
+// --- Job search ---
 async function searchJobs() {
   const title = document.getElementById('search-title').value.trim();
   if (!title) { setStatus('search-status','error','Please enter a job title first.'); return; }
-  const loc = document.getElementById('search-loc').value;
+
+  // collect locations — also grab any unsubmitted text in the input
+  const rawLoc = document.getElementById('loc-input').value.trim();
+  if (rawLoc && !locations.includes(rawLoc)) { locations.push(rawLoc); document.getElementById('loc-input').value=''; renderLocTags(); }
+  const locs = locations.length ? locations : ['Remote'];
+
   const level = document.getElementById('search-level').value;
   const salary = document.getElementById('search-salary').value;
   const skills = document.getElementById('search-skills').value;
+  const stages = activeStages.size ? [...activeStages].join(', ') : 'any (public, private, pre-IPO)';
+
   document.getElementById('search-results').innerHTML = '';
-  const prompt = `You are a job search assistant. Generate 4 realistic tech job listings for:
-Role: ${title}, Location: ${loc}, Level: ${level}${salary?', Min salary: $'+salary:''}${skills?', Skills: '+skills:''}
-Return ONLY a valid JSON array, no markdown. Each object: company, title, location, salary (range), match (70-99), tags (3 strings), summary (2 sentences), posted.`;
+
+  const prompt = `You are an expert tech job search assistant with deep knowledge of the tech industry as of early 2025.
+
+Generate 5 realistic, specific tech/data job listings matching these criteria:
+- Role: ${title}
+- Locations: ${locs.join(', ')} (spread results across these locations where possible)
+- Experience level: ${level}
+- Company stage preference: ${stages}
+- ${salary ? 'Min salary: $'+salary : 'Any salary range'}
+- ${skills ? 'Candidate skills: '+skills : ''}
+
+For each job, also provide:
+1. Company stage (Public / Private / Pre-IPO) based on your knowledge of real companies
+2. Recent company news/insights (funding rounds, product launches, layoffs, growth — whatever is most relevant and recent you know about)
+3. 2-3 short news bullets about the company
+
+Return ONLY a valid JSON array, no markdown, no backticks. Each object must have exactly these fields:
+- company (string: real well-known tech company name)
+- title (string: specific job title)
+- location (string: one of the requested locations or Remote)
+- salary (string: realistic range e.g. "$130k–$160k")
+- match (integer: 70-99, skill match score)
+- stage (string: exactly one of "Public", "Private", "Pre-IPO")
+- tags (array of 3 strings: tech stack)
+- summary (string: 2 sentences about the role)
+- posted (string: e.g. "2 days ago")
+- companySnapshot (object with keys: founded, size, funding, mission — each a short string)
+- newsBullets (array of exactly 3 strings: recent notable facts/news about the company, each under 20 words)`;
+
   const text = await callClaude(prompt, 'search-status', 'search-btn');
   if (!text) return;
+
   let jobs;
   try { jobs = JSON.parse(text.replace(/```json|```/g,'').trim()); }
-  catch(e) { setStatus('search-status','error',`Couldn't parse response. Try again.`); return; }
+  catch(e) { setStatus('search-status','error','Could not parse AI response. Please try again.'); return; }
+
   const el = document.getElementById('search-results');
-  jobs.forEach(job => {
+  el.innerHTML = '';
+
+  jobs.forEach((job, idx) => {
     const mc = job.match >= 85 ? 'green' : job.match >= 75 ? 'amber' : 'blue';
-    el.innerHTML += `<div class="result-card">
+    const stageBadgeClass = job.stage === 'Public' ? 'stage-badge-public' : job.stage === 'Pre-IPO' ? 'stage-badge-preipo' : 'stage-badge-private';
+    const stageIcon = job.stage === 'Public' ? 'ti-building-bank' : job.stage === 'Pre-IPO' ? 'ti-rocket' : 'ti-lock';
+    const snap = job.companySnapshot || {};
+    const news = job.newsBullets || [];
+
+    el.innerHTML += `<div class="result-card" id="job-${idx}">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
-        <div><div class="job-title">${job.title}</div>
-        <div class="job-meta"><i class="ti ti-building"></i> ${job.company} &nbsp;·&nbsp; <i class="ti ti-map-pin"></i> ${job.location} &nbsp;·&nbsp; <i class="ti ti-clock"></i> ${job.posted}</div></div>
-        <div style="display:flex;align-items:center;gap:8px;">
+        <div>
+          <div class="job-title">${job.title}</div>
+          <div class="job-meta">
+            <span><i class="ti ti-building" style="font-size:13px;vertical-align:-1px;"></i> ${job.company}</span>
+            <span><i class="ti ti-map-pin" style="font-size:13px;vertical-align:-1px;"></i> ${job.location}</span>
+            <span><i class="ti ti-clock" style="font-size:13px;vertical-align:-1px;"></i> ${job.posted}</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;">
+          <span class="badge ${stageBadgeClass}"><i class="ti ${stageIcon}" style="font-size:11px;vertical-align:-1px;"></i> ${job.stage}</span>
           <span class="badge badge-${mc}">${job.match}% match</span>
           <span style="font-size:14px;font-weight:500;color:var(--text2)">${job.salary}</span>
         </div>
       </div>
+
       <div style="display:flex;gap:6px;margin:8px 0;flex-wrap:wrap;">${job.tags.map(t=>`<span class="badge badge-gray">${t}</span>`).join('')}</div>
       <div style="font-size:13px;color:var(--text2);line-height:1.6;">${job.summary}</div>
+
       <div class="result-actions">
         <button class="btn" style="font-size:13px;" onclick="trackJob('${job.company.replace(/'/g,"\\'")}','${job.title.replace(/'/g,"\\'")}')"><i class="ti ti-plus"></i> Track</button>
         <button class="btn" style="font-size:13px;" onclick="draftForJob('${job.company.replace(/'/g,"\\'")}','${job.title.replace(/'/g,"\\'")}')"><i class="ti ti-mail"></i> Draft email</button>
+        <button class="btn" style="font-size:13px;" onclick="toggleInsights(${idx})"><i class="ti ti-building-community"></i> Company insights</button>
+      </div>
+
+      <div class="company-insights" id="insights-${idx}">
+        <div style="font-size:13px;font-weight:500;margin-bottom:8px;"><i class="ti ti-building-community" style="font-size:14px;vertical-align:-2px;"></i> ${job.company} — Company snapshot</div>
+        <div class="insights-grid">
+          ${snap.founded ? `<div class="insight-block"><div class="insight-label">Founded</div>${snap.founded}</div>` : ''}
+          ${snap.size ? `<div class="insight-block"><div class="insight-label">Team size</div>${snap.size}</div>` : ''}
+          ${snap.funding ? `<div class="insight-block"><div class="insight-label">Funding / status</div>${snap.funding}</div>` : ''}
+          ${snap.mission ? `<div class="insight-block" style="grid-column:span 2"><div class="insight-label">Mission</div>${snap.mission}</div>` : ''}
+        </div>
+        ${news.length ? `
+        <div style="font-size:13px;font-weight:500;margin:12px 0 8px;"><i class="ti ti-news" style="font-size:14px;vertical-align:-2px;"></i> Recent news &amp; highlights</div>
+        <div class="news-list">
+          ${news.map(n => `<div class="news-item"><div class="news-title"><i class="ti ti-point-filled" style="font-size:10px;color:var(--text3);vertical-align:1px;margin-right:4px;"></i>${n}</div></div>`).join('')}
+        </div>` : ''}
       </div>
     </div>`;
   });
 }
+
+function toggleInsights(idx) {
+  const el = document.getElementById('insights-'+idx);
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+// --- Tracker ---
+function save() { localStorage.setItem('jsa_apps', JSON.stringify(applications)); }
 
 function trackJob(company, role) {
   applications.push({ company, role, status:'applied', date:new Date().toISOString().split('T')[0], notes:'' });
@@ -331,16 +484,19 @@ function renderTracker() {
       <button class="btn" style="font-size:12px;padding:4px 10px;" onclick="removeApp(${i})"><i class="ti ti-trash"></i></button>
     </div>`).join('')+'</div>';
 }
+
+// --- Email draft ---
 async function draftEmail() {
   const company = document.getElementById('email-company').value.trim();
   const role = document.getElementById('email-role').value.trim();
-  if (!company || !role) { setStatus('email-status','error','Fill in company and role.'); return; }
+  if (!company || !role) { setStatus('email-status','error','Fill in the target company and role.'); return; }
   const prompt = `Write a concise cold outreach email for a tech job seeker.
 From: ${document.getElementById('email-yourname').value||'the candidate'}
 Background: ${document.getElementById('email-bg').value||'a tech professional'}
-To: ${document.getElementById('email-toname').value||'hiring team'} at ${company}, Role: ${role}
-${document.getElementById('email-why').value?'Why: '+document.getElementById('email-why').value:''}
-Under 180 words. Start with "Subject: ..." then the email. Warm, specific, ready to send.`;
+To: ${document.getElementById('email-toname').value||'hiring team'} at ${company}
+Role: ${role}
+${document.getElementById('email-why').value?'Why this company: '+document.getElementById('email-why').value:''}
+Keep it under 180 words. Start with "Subject: ..." on line 1, then the email body. Warm, specific, ready to send. No placeholder brackets.`;
   document.getElementById('email-output').style.display='none';
   const text = await callClaude(prompt,'email-status','email-btn');
   if (!text) return;
